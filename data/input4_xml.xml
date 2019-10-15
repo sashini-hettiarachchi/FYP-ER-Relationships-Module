@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<er name="music">
+    <entity name="place">
+        <attribute name="address" value="primary_key"/>
+        <attribute name="phone_no" />
+    </entity>
+    <entity name="musician">
+        <attribute name="ssn" value="primary_key"/>
+        <attribute name="name"/>
+    </entity>
+    <entity name="song">
+        <attribute name="title" value="primary_key"/>
+        <attribute name="author"/>
+    </entity>
+
+    <entity name="album">
+        <attribute name="album_no" value="primary_key"/>
+        <attribute name="album_identifier" />
+        <attribute name="format" />
+        <attribute name="copyright_date" />
+        <attribute name="title" />
+    </entity>
+    <entity name="instrument">
+        <attribute name="instrument_no" value="primary_key"/>
+        <attribute name="name" />
+        <attribute name="musical_key" />
+    </entity>
+</er>

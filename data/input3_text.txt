@@ -1,0 +1,13 @@
+Professors have an SSN, a name, an age, a rank, and a research specialty.
+Projects have a project number, a sponsor name (e.g., NSF), a starting date, an ending date, and a budget.
+Graduate students have an SSN, a name, an age, and a degree program (e.g., M.S. or Ph.D.).
+Each project is managed by one professor (known as the project’s principal investigator).
+Each project is worked on by one or more professors (known as the project’s co-investigators).
+Professors can manage and/or work on multiple projects.
+Each project is worked on by one or more graduate students (known as the project’s research assistants).
+When graduate students work on a project, a professor must supervise their work on the project. Graduate students can work on multiple projects, in which case they will have a (potentially different) supervisor for each one.
+Departments have a department number, a department name, and a main office.
+Departments have a professor (known as the chairman) who runs the department.
+Professors work in one or more departments, and for each department that they work in, a time percentage is associated with their job.
+Graduate students have one major department in which they are working on their degree.
+Each graduate student has another, more senior graduate student (known as a student advisor) who advises him or her on what courses to take.

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+
+<er name="estUniversity">
+	<entity name="university">
+	</entity>
+	<entity name="lecturers">
+		<attribute name="lecturerId" value="primaryKey"/>
+	</entity>
+	<entity name="course">
+		<attribute name="courseId" value="primaryKey"/>
+		<attribute name="numberOfHours"/>
+    </entity>
+    <entity name="student">
+	    <attribute name="studentId" value="primaryKey"/>
+    </entity>
+    <entity name="degree">
+	    <attribute name="degreeId" value="primaryKey"/>
+        <attribute name="degreeName"/>
+        <attribute name="programFee"/>
+    </entity>
+    <entity name="faculties">
+	    <attribute name="facultyId" value="primaryKey"/>
+        <attribute name="facultyName"/>
+    </entity>
+</er>
+

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<er name="pharmacy">
+    <entity name="patient">
+        <attribute name="ssn" value="primary_key"/>
+        <attribute name="name" />
+        <attribute name="age"/>
+        <attribute name="address"/>
+    </entity>
+    <entity name="doctor">
+        <attribute name="ssn" value="primary_key"/>
+        <attribute name="name"/>
+        <attribute name="speciality"/>
+        <attribute name="experience"/>
+    </entity>
+    <entity name="drug">
+        <attribute name="trade_name" value="primary_key"/>
+        <attribute name="formula"/>
+    </entity>
+
+    <entity name="company">
+        <attribute name="name" value="primary_key"/>
+        <attribute name="phone_no" />
+    </entity>
+    <entity name="pharmacy">
+        <attribute name="name" value="primary_key"/>
+        <attribute name="phone_no" />
+        <attribute name="address" />
+    </entity>
+    <entity name="supervisor"> </entity>
+</er>
+

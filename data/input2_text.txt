@@ -1,0 +1,13 @@
+The EST university has three Faculties, Education, Science and Information Technology. Each faculty can offer one or more degree programs.
+The faculty of Education and the Faculty of Science offer Bachelor of Education and Bachelor of Science degree programs respectively.
+However,the Faculty of Information Technology.
+Offers two degree programs: Bachelor of Science in information Technology and Bachelor of Science in Software Engineering.
+At the time of registration, students should pay the full degree program fee which may differ from one degree program to another.
+A student can enroll in only one degree program at a time.
+A degree program has two type of course units: compulsory and optional.
+A course unit can be available in more than one degree program.
+EST university has many lectures.
+A lecturer can be assigned to one or more course units.
+A course unit can be assigned to one or more lecturers.
+Number of hours allocated for a course unit distributed among the assigned lectures when more than one lecturer is assigned to a course unit.
+Each faculty, degree program, course unit, lecturer, and student are uniquely identified by ‘facultyID’, ‘degreeID’ , ‘courseID’, ‘lecturerID’ and ‘studentID’ respectively.

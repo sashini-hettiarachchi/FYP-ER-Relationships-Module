@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<er name="university">
+    <entity name="professor">
+        <attribute name="ssn" value="primary_key"/>
+        <attribute name="name" />
+        <attribute name="age"/>
+        <attribute name="rank"/>
+        <attribute name="research_speciality"/>
+    </entity>
+    <entity name="project">
+        <attribute name="project_number" value="primary_key"/>
+        <attribute name="sponcer_name"/>
+        <attribute name="start_date"/>
+        <attribute name="end_date"/>
+        <attribute name="budget"/>
+    </entity>
+    <entity name="student">
+        <attribute name="ssn" value="primary_key"/>
+        <attribute name="name"/>
+        <attribute name="age"/>
+        <attribute name="degree_programme" />
+    </entity>
+
+    <entity name="department">
+        <attribute name="department_no" value="primary_key"/>
+        <attribute name="main_office" />
+        <attribute name="department_name"/>
+    </entity>
+</er>
+
+

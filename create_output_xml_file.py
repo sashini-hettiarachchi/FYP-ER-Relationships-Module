@@ -6,7 +6,7 @@ table = []
 
 
 def xml_input_handling():
-    tree = ET.parse('input-data.xml')
+    tree = ET.parse('first_output.xml')
     root = tree.getroot()
     # print(root)
     return root
@@ -283,7 +283,7 @@ def build_output_xml_file():
     output_dic = {'database': {'@name': root.get('name'), 'table': table}}
     # print(output_dic)
 
-    with open('new_data_2.json', 'w+') as json_file:
+    with open('output.json', 'w+') as json_file:
         json.dump(output_dic, json_file, indent=4, sort_keys=True)
 
     output_xml = xmltodict.unparse(output_dic, pretty=True)

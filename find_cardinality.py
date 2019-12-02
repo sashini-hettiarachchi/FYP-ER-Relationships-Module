@@ -1,8 +1,8 @@
-from identify_relationship import binary_relationship_dic_list
+from identify_relationship_1 import binary_relationship_dic_list
 import nltk
 import inflect
 import re
-from file_manipulation import xml_input_handling
+from file_manipulation_0 import xml_input_handling
 from common_nlp import stemmer, lemmatizer, sentences_into_word, text_into_sentence
 
 one_to_one_relationship_list = []

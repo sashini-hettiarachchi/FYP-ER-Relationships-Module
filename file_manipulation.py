@@ -1,7 +1,7 @@
 # open input text scenario
 import xml.etree.ElementTree as ET
 
-text_file = open("data\\input_text.txt", "r")
+text_file = open("data\\input2_text.txt", "r")
 
 
 if text_file.mode == 'r':
@@ -13,6 +13,6 @@ if text_file.mode == 'r':
 
 # Read input XML file
 def xml_input_handling():
-    tree = ET.parse("data\\input_xml.xml")
+    tree = ET.parse("data\\input2_xml.xml")
     root = tree.getroot()
     return root

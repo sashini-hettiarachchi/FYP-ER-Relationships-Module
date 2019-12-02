@@ -1,6 +1,6 @@
 import json
 import xmltodict
-from find_cardinality import relation
+from find_cardinality_2 import relation
 import glob
 from xml.etree import ElementTree
 

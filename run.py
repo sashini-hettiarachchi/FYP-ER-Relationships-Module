@@ -1,11 +1,11 @@
 import json
 import xml.etree.ElementTree as ET
 import xmltodict
-import create_er_xml_file
+import create_er_xml_file_3
 
 table = []
 
-create_er_xml_file.create_input_xml_file()
+create_er_xml_file_3.create_input_xml_file()
 
 
 def xml_input_handling():

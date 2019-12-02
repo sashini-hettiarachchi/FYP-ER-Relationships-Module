@@ -1,7 +1,5 @@
 import csv
-import json
 import xml.etree.ElementTree as ET
-import xmltodict
 
 row_list = []
 FILL = "#dae8fc"
@@ -22,7 +20,7 @@ def xml_input_handling():
 
 
 def create_csv_file():
-    with open('er.csv', 'w', newline='') as file:
+    with open('er.csv', 'w+', newline='') as file:
         fieldnames = ["node", "fill", "stroke", "shape", "one", "many", "attri", "compo"]
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
@@ -101,6 +99,7 @@ def create_csv_file():
                 print(attribute_dic)
 
 
+create_csv_file()
 text_list = []
 
 with open('er.csv', "r") as my_input_file:

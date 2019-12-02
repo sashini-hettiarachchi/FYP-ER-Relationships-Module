@@ -6,14 +6,14 @@
 	<entity name="lecturers">
 		<attribute name="lecturerId" value="primaryKey"/>
 	</entity>
-	<entity name="course">
+	<entity name="unit">
 		<attribute name="courseId" value="primaryKey"/>
 		<attribute name="numberOfHours"/>
     </entity>
     <entity name="student">
 	    <attribute name="studentId" value="primaryKey"/>
     </entity>
-    <entity name="degree">
+    <entity name="program">
 	    <attribute name="degreeId" value="primaryKey"/>
         <attribute name="degreeName"/>
         <attribute name="programFee"/>

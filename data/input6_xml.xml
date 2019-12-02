@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<er name="airport">
+    <entity name="airplanes">
+        <attribute name="registration" value="primary_key"/>
+    </entity>
+    <entity name="models">
+	    <attribute name="number" value="primary_key"/>
+	    <attribute name="capacity"/>
+	    <attribute name="weight"/>
+    </entity>
+    <entity name="technicians">
+        <attribute name="nic" value="primary_key"/>
+	    <attribute name="name"/>
+	    <attribute name="address"/>
+	    <attribute name="phone" type="multi_valued"/>
+	    <attribute name="salary"/>
+    </entity>
+    <entity name="event">
+	    <attribute name="time"/>
+	    <attribute name="name"/>
+        <attribute name="date"/>
+	    <attribute name="hours"/>
+    </entity>
+    <entity name="types">
+	    <attribute name="number" value="primary_key"/>
+        <attribute name="name"/>
+        <attribute name="score"/>
+    </entity>
+</er>

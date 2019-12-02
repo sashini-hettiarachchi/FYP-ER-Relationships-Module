@@ -1,0 +1,7 @@
+A small racing league want a database to keep track of teams, drivers, races and scores in the league.
+The league is run for teams, which are identified by their names.
+Each team has one or more drivers signed up, and each driver is registered with the league and has a unique league licence number.
+First and last names of the drivers should also be included.
+A driver may only participate for a single team throughout the season.
+Races are identified simply by the dates when they are run. For each race, the league also wants to store the venue where it took place.
+Drivers participate in races, and for each participating driver the database should store the total race time for that driver, and the league score they got from that race.

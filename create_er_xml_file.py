@@ -24,8 +24,9 @@ def run(folder):
             h.write(config)
 
 
-def create_er_xml_file():
-    print(relation)
+def create_input_xml_file():
+    # print(relation)
+    run(folder)
     output_dic = {'er': {'relation': relation}}
 
     with open('res\\relation.json', 'w+') as json_file:
@@ -37,5 +38,4 @@ def create_er_xml_file():
         xml_file.write(output_xml)
 
 
-create_er_xml_file()
-run(folder)
+

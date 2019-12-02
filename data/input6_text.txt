@@ -1,0 +1,18 @@
+The officials decided that all information related to the airport should be organized using a DBMS, and you have been hired to design the database.
+Your first task is to organize the information about all the airplanes stationed and maintained at the airport.
+The relevant information is as follows:
+Every airplane has a registration number.
+Each airplane belongs to a specific model.
+The airport accommodates a number of airplane models and each model is identified by a model number (e.g. DC-10) and has a capacity and a weight.
+A number of technicians work at the airport.
+You need to store the name, NIC, address, phone number, and salary of each technician.
+You can assume that each technician is uniquely identified by a national identity card (NIC) number.
+Each technician is an expert on one or more plane model(s), and his or her expertise may overlap with that of other technicians.
+This information about technicians must also be recorded.
+The airport has a number of test types, that are used periodically to ensure that airplanes are still airworthy.
+Each test type has Federal Aviation Administration (FAA) test number, a name, and a maximum possible score
+The FAA requires the airport to keep track of each time a given airplane is tested by a given technician using a given test.
+For each testing event, the information needed is the date and time, the number of hours the technician spent doing the test, and the score the airplane received on the test.
+For a given plane, several test types can be done parallel for a particular time.
+Draw an ER diagram for the airport database. Be sure to indicate the various attributes of each
+entity and relationship set; also specify the keys.

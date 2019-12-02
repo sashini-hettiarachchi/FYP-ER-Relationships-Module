@@ -1,4 +1,5 @@
-The EST university has three Faculties, Education, Science and Information Technology. Each faculty can offer one or more degree programs.
+The EST university has three Faculties, Education, Science and Information Technology.
+Each faculty can offer one or more degree programs.
 The faculty of Education and the Faculty of Science offer Bachelor of Education and Bachelor of Science degree programs respectively.
 However,the Faculty of Information Technology.
 Offers two degree programs: Bachelor of Science in information Technology and Bachelor of Science in Software Engineering.

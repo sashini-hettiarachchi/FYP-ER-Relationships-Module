@@ -34,14 +34,14 @@
             {
                 "@degree": "binary",
                 "@name": "controls",
-                "@type": "one_to_many",
+                "@type": "many_to_many",
                 "member1": {
                     "@cardinality": "many",
                     "@name": "projects",
                     "@primary_key": "number"
                 },
                 "member2": {
-                    "@cardinality": "one",
+                    "@cardinality": "many",
                     "@name": "department",
                     "@primary_key": "number"
                 }
@@ -49,9 +49,9 @@
             {
                 "@degree": "binary",
                 "@name": "is_assigned",
-                "@type": "one_to_one",
+                "@type": "one_to_many",
                 "member1": {
-                    "@cardinality": "one",
+                    "@cardinality": "many",
                     "@name": "department",
                     "@primary_key": "number"
                 },
@@ -64,14 +64,14 @@
             {
                 "@degree": "binary",
                 "@name": "is_working",
-                "@type": "one_to_one",
+                "@type": "many_to_many",
                 "member1": {
-                    "@cardinality": "one",
+                    "@cardinality": "many",
                     "@name": "project",
                     "@primary_key": "number"
                 },
                 "member2": {
-                    "@cardinality": "one",
+                    "@cardinality": "many",
                     "@name": "employee",
                     "@primary_key": "number"
                 }
@@ -88,7 +88,7 @@
                 "member2": {
                     "@cardinality": "many",
                     "@name": "dependents",
-                    "@primary_key": "number"
+                    "@primary_key": "dependent_number"
                 }
             }
         ]

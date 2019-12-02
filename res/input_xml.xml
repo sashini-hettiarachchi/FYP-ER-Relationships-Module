@@ -23,7 +23,7 @@
         <attribute name="location" type="multi-valued" />
     </entity>
 
-    <entity name="dependent">
+    <entity name="dependents">
         <attribute name="dependent_number" value="primary_key"/>
         <attribute name="first_name" />
         <attribute name="gender"/>

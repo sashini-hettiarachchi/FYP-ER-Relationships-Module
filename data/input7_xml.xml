@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<er name="racing_er">
+<entity name="team">
+	<attribute name="name"/>
+</entity>
+<entity name="driver">
+    <attribute name="licence_number"  value="primary_key"/>
+	<attribute name="first_name"/>
+	<attribute name="last_name"/>
+</entity>
+<entity name="race">
+    <attribute name="venue"/>
+    <attribute name="date"/>
+</entity>
+</er>
+
+

@@ -8,20 +8,20 @@
 		<member1 name="department" cardinality="one" primary_key="number"></member1>
 		<member2 name="employee" cardinality="one" primary_key="number"></member2>
 	</relation>
-	<relation name="controls" degree="binary" type="one_to_many">
+	<relation name="controls" degree="binary" type="many_to_many">
 		<member1 name="projects" cardinality="many" primary_key="number"></member1>
-		<member2 name="department" cardinality="one" primary_key="number"></member2>
+		<member2 name="department" cardinality="many" primary_key="number"></member2>
 	</relation>
-	<relation name="is_assigned" degree="binary" type="one_to_one">
-		<member1 name="department" cardinality="one" primary_key="number"></member1>
+	<relation name="is_assigned" degree="binary" type="one_to_many">
+		<member1 name="department" cardinality="many" primary_key="number"></member1>
 		<member2 name="employee" cardinality="one" primary_key="number"></member2>
 	</relation>
-	<relation name="is_working" degree="binary" type="one_to_one">
-		<member1 name="project" cardinality="one" primary_key="number"></member1>
-		<member2 name="employee" cardinality="one" primary_key="number"></member2>
+	<relation name="is_working" degree="binary" type="many_to_many">
+		<member1 name="project" cardinality="many" primary_key="number"></member1>
+		<member2 name="employee" cardinality="many" primary_key="number"></member2>
 	</relation>
 	<relation name="related_with" degree="binary" type="one_to_many">
 		<member1 name="employee" cardinality="one" primary_key="number"></member1>
-		<member2 name="dependents" cardinality="many" primary_key="number"></member2>
+		<member2 name="dependents" cardinality="many" primary_key="dependent_number"></member2>
 	</relation>
 </er>

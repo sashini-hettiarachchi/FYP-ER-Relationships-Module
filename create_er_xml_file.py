@@ -1,8 +1,9 @@
 import json
 import xmltodict
-from find_cardinality_2 import relation
+from find_cardinality import relation
 import glob
 from xml.etree import ElementTree
+
 
 table = []
 folder = "res"
@@ -26,7 +27,7 @@ def run(folder):
 
 def create_input_xml_file():
     # print(relation)
-    run(folder)
+
     output_dic = {'er': {'relation': relation}}
 
     with open('res\\relation.json', 'w+') as json_file:
@@ -37,5 +38,5 @@ def create_input_xml_file():
     with open('res\\relation.xml', 'w+') as xml_file:
         xml_file.write(output_xml)
 
-
+    run(folder)
 

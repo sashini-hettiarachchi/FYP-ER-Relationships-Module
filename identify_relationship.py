@@ -1,6 +1,6 @@
 import nltk
 import re
-from file_manipulation_0 import xml_input_handling
+from file_manipulation import xml_input_handling
 from common_nlp import stopWords, text_into_sentence, sentences_into_word, lemmatizer
 
 filtered_sentence_list = []

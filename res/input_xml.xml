@@ -11,7 +11,7 @@
         <attribute name="gender"/>
         <attribute name="date_of_birth"/>
     </entity>
-    <entity name="projects">
+    <entity name="project">
         <attribute name="number" value="primary_key"/>
         <attribute name="name"/>
         <attribute name="location"/>

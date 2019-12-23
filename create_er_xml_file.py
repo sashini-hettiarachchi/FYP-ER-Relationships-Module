@@ -21,7 +21,7 @@ def run(folder):
             first.extend(data)
     if first is not None:
         config = ElementTree.tostring(first).decode()
-        with open("first_output.xml", "w+", encoding="utf-8") as h:
+        with open("res\\first_output.xml", "w+", encoding="utf-8") as h:
             h.write(config)
 
 

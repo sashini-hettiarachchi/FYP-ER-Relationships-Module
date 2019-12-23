@@ -13,14 +13,14 @@ DERIVED_SHAPE = 'ellipse;whiteSpace=wrap;html=1;align=center;dashed=1;'
 
 
 def xml_input_handling():
-    tree = ET.parse('first_output.xml')
+    tree = ET.parse('res\\first_output.xml')
     root = tree.getroot()
     print(root)
     return root
 
 
 def create_csv_file():
-    with open('er.csv', 'w+', newline='') as file:
+    with open('res\\er.csv', 'w+', newline='') as file:
         fieldnames = ["node", "fill", "stroke", "shape", "one", "many", "attri", "compo"]
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
@@ -98,16 +98,17 @@ def create_csv_file():
                 writer.writerow(attribute_dic)
                 print(attribute_dic)
 
+def create_draw_text_file():
+    create_csv_file()
+    text_list = []
+    with open('res\\er.csv', "r") as my_input_file:
+        for line in my_input_file:
+            # line = line.split(",", 2)
+            text_list.append("".join(line))
 
-create_csv_file()
-text_list = []
+    with open('res\\er.txt', "a") as my_output_file:
+        for line in text_list:
+            my_output_file.write("" + line)
+        print('Successfully created ER file')
 
-with open('er.csv', "r") as my_input_file:
-    for line in my_input_file:
-        # line = line.split(",", 2)
-        text_list.append("".join(line))
-
-with open('er.txt', "a") as my_output_file:
-    for line in text_list:
-        my_output_file.write("" + line)
-    print('Successfully created ER file')
+# create_draw_text_file()

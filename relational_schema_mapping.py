@@ -6,12 +6,12 @@ import create_er_xml_file
 
 table = []
 
-create_er_xml_file.create_input_xml_file()
+# create_er_xml_file.create_input_xml_file()
 
 
 
 def xml_input_handling():
-    tree = ET.parse('first_output.xml')
+    tree = ET.parse('res\\first_output.xml')
     root = tree.getroot()
     # print(root)
     return root
@@ -290,13 +290,13 @@ def build_output_xml_file():
     output_dic = {'database': {'@name': root.get('name'), 'table': table}}
     # print(output_dic)
 
-    with open('output.json', 'w+') as json_file:
+    with open('res\\output.json', 'w+') as json_file:
         json.dump(output_dic, json_file, indent=4, sort_keys=True)
 
     output_xml = xmltodict.unparse(output_dic, pretty=True)
 
-    with open('output.xml', 'w+') as xml_file:
+    with open('res\\output.xml', 'w+') as xml_file:
         xml_file.write(output_xml)
 
 
-build_output_xml_file()
+# build_output_xml_file()

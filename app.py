@@ -1,7 +1,5 @@
 from flask import Flask, render_template, request
-import relational_schema_mapping
-import draw_er
-import create_er_xml_file
+from src.features import draw_er, create_er_xml_file, map_er_to_relational_schema
 
 app = Flask(__name__)
 
@@ -19,7 +17,7 @@ def submit():
         if request.form['submit_btn'] == 'add-text':
             text = request.form['scenario']
             print(text)
-            filehandle = open("res\\input_text.txt", "w")
+            filehandle = open("data\\input_text.txt", "w")
             filebuffer = text
             filehandle.writelines(filebuffer)
             filehandle.close()
@@ -27,8 +25,8 @@ def submit():
         elif request.form['submit_btn'] == 'clear-text':
             pass  # do something else
         elif request.form['submit_btn'] == 'generate-er':
-            create_er_xml_file.create_input_xml_file()
-            relational_schema_mapping.build_output_xml_file()
+            create_er_xml_file.create_output_xml_file()
+            map_er_to_relational_schema.build_output_xml_file()
             draw_er.create_csv_file()
             draw_er.create_draw_text_file()
 

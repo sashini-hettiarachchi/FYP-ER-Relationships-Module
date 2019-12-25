@@ -104,6 +104,23 @@ def create_draw_text_file():
             text_list.append("".join(line))
 
     with open('src\\data\\er.txt', "a") as my_output_file:
+        my_output_file.write("""# label: %node%
+# style: shape=%shape%;fillColor=%fill%;strokeColor=%stroke%;
+# namespace: csvimport-
+# connect: {"from":"many", "to":"node","invert": true, "style":"edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;"}
+# connect: {"from":"one", "to":"node", "invert": true,"style":"edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERone;endFill=1;"}
+# connect: {"from":"attri","invert": true, "to":"node", "style":"endArrow=none;html=1;rounded=0;"}
+# connect: {"from":"compo","invert": true, "to":"node", "style":"endArrow=none;html=1;rounded=0;"}
+# width: auto
+# height: auto
+# padding: 15
+# ignore: id,shape,fill,stroke,refs
+# nodespacing: 40
+# levelspacing: 100
+# edgespacing: 40
+# layout: auto
+## CSV starts under this line
+""")
         for line in text_list:
             my_output_file.write("" + line)
         print('Successfully created ER file')

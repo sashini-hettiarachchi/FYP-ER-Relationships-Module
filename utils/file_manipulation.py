@@ -1,5 +1,6 @@
 # open input text scenario
 import xml.etree.ElementTree as ET
+import os
 
 text_file = open("G:\\FYP-new\\src\\data\\input_text.txt", "r")
 
@@ -22,3 +23,39 @@ def get_root_of_er_xml():
     root = tree.getroot()
     print(root)
     return root
+
+def remove_files():
+    if os.path.exists("G:\\FYP-new\\src\\data\\first_output.xml"):
+        os.remove("G:\\FYP-new\\src\\data\\first_output.xml")
+    else:
+        print('first_output.xml does not exit')
+
+    if os.path.exists("G:\\FYP-new\\src\\data\\er.csv"):
+        os.remove("G:\\FYP-new\\src\\data\\er.csv")
+    else:
+        print('er.csv does not exit')
+
+    if os.path.exists("G:\\FYP-new\\src\\data\\er.txt"):
+        os.remove("G:\\FYP-new\\src\\data\\er.txt")
+    else:
+        print('er.txt does not exit')
+
+    if os.path.exists("G:\\FYP-new\\src\\data\\output.json"):
+        os.remove("G:\\FYP-new\\src\\data\\output.json")
+    else:
+        print('output.json does not exit')
+
+    if os.path.exists("G:\\FYP-new\\src\\data\\output.xml"):
+        os.remove("G:\\FYP-new\\src\\data\\output.xml")
+    else:
+        print('output.xml does not exit')
+
+    if os.path.exists("G:\\FYP-new\\src\\data\\relation.json"):
+        os.remove("G:\\FYP-new\\src\\data\\relation.json")
+    else:
+        print('relation.json does not exit')
+
+    if os.path.exists("G:\\FYP-new\\src\\data\\relation.xml"):
+        os.remove("G:\\FYP-new\\src\\data\\relation.xml")
+    else:
+        print('relation.xml does not exit')

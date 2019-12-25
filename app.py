@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request
-from src.features import draw_er, create_er_xml_file, map_er_to_relational_schema
+from flask import Flask, render_template, request, redirect, url_for
+import main
+from utils import file_manipulation
 
 app = Flask(__name__)
 
@@ -17,20 +18,24 @@ def submit():
         if request.form['submit_btn'] == 'add-text':
             text = request.form['scenario']
             print(text)
-            filehandle = open("data\\input_text.txt", "w")
+            filehandle = open(".\\src\\data\\input_text.txt", "w")
             filebuffer = text
             filehandle.writelines(filebuffer)
             filehandle.close()
 
-        elif request.form['submit_btn'] == 'clear-text':
-            pass  # do something else
-        elif request.form['submit_btn'] == 'generate-er':
-            create_er_xml_file.create_output_xml_file()
-            map_er_to_relational_schema.build_output_xml_file()
-            draw_er.create_csv_file()
-            draw_er.create_draw_text_file()
+        elif request.form['submit_btn'] == 'query-generator':
+            main.create_relational_schema()
+            print("Successfully Generated Relational Schema")
 
-    return 'You entered: {}'.format(request.form['scenario'])
+        elif request.form['submit_btn'] == 'generate-er':
+            main.create_er_diagram_xml_file()
+            main.create_er_diagram_text_file()
+            print("Successfully Generated ER Diagram")
+
+        elif request.form['submit_btn'] == 'clear-all':
+            file_manipulation.remove_files()
+
+    return render_template('home.html')
 
 
 if __name__ == '__main__':

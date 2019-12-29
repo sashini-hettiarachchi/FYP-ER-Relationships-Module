@@ -13,7 +13,6 @@ def hello_world():
 @app.route('/submit', methods=['POST'])
 def submit():
     print("xyz")
-
     if request.method == 'POST':
         if request.form['submit_btn'] == 'add-text':
             text = request.form['scenario']

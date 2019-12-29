@@ -2,6 +2,7 @@ import nltk
 from nltk.corpus import stopwords
 from utils.file_manipulation import input_text
 
+
 stopWords = set(stopwords.words('english'))
 lemmatizer = nltk.WordNetLemmatizer()
 stemmer = nltk.PorterStemmer()

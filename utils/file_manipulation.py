@@ -62,3 +62,8 @@ def remove_files():
         os.remove(PATH+"\\relation.xml")
     else:
         print('relation.xml does not exit')
+
+    if os.path.exists(PATH+"\\intermediate_text.txt"):
+        os.remove(PATH+"\\intermediate_text.txt")
+    else:
+        print('intermediate_text.txt does not exit')

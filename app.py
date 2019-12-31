@@ -17,7 +17,7 @@ def submit():
         if request.form['submit_btn'] == 'add-text':
             text = request.form['scenario']
             print(text)
-            filehandle = open(".\\data\\input_text.txt", "w")
+            filehandle = open(file_manipulation.PATH+"\\input_text.txt", "w")
             filebuffer = text
             filehandle.writelines(filebuffer)
             filehandle.close()

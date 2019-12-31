@@ -1,15 +1,16 @@
 import json
 import xml.etree.ElementTree as ET
 import xmltodict
+from utils.file_manipulation import PATH
 
 table = []
+
 
 # create_er_xml_file.create_input_xml_file()
 
 
-
 def xml_input_handling():
-    tree = ET.parse('src\\data\\first_output.xml')
+    tree = ET.parse(PATH + '\\first_output.xml')
     root = tree.getroot()
     # print(root)
     return root
@@ -28,7 +29,7 @@ def entities_mapping():
                 if not type == 'multi-valued' and not type == 'derived' and not type == 'composite_parent':
                     # print(attribute.get('name'))
                     if value == 'primary_key':
-                        new_primary_key =  attribute.get('name')
+                        new_primary_key = attribute.get('name')
                         column.append({'@name': new_primary_key, '@value1': 'primary_key'})
                         # print(column)
                     else:
@@ -130,7 +131,7 @@ def binary_many_to_many_relationship_mapping():
     for relationship in root.findall('relation'):
         if relationship.get('degree') == 'binary':
             if relationship.get('type') == 'many_to_many':
-                column =[]
+                column = []
                 # print(relationship.get('name'))
                 for member1 in relationship.findall('member1'):
                     primary_key_member1 = member1.get('primary_key')
@@ -141,7 +142,7 @@ def binary_many_to_many_relationship_mapping():
                     # print("column", column)
                 for member2 in relationship.findall('member2'):
                     primary_key_member2 = member2.get('primary_key')
-                    new_primary_key_member2 =  primary_key_member2
+                    new_primary_key_member2 = primary_key_member2
                     # print(new_primary_key_member2)
                     column.append({'@name': new_primary_key_member2, '@value1': 'primary_key', '@value2': 'foreign_key',
                                    '@ref': member2.get('name')})
@@ -288,13 +289,12 @@ def build_output_xml_file():
     output_dic = {'database': {'@name': root.get('name'), 'table': table}}
     # print(output_dic)
 
-    with open('src\\data\\output.json', 'w+') as json_file:
+    with open(PATH+'\\output.json', 'w+') as json_file:
         json.dump(output_dic, json_file, indent=4, sort_keys=True)
 
     output_xml = xmltodict.unparse(output_dic, pretty=True)
 
-    with open('src\\data\\output.xml', 'w+') as xml_file:
+    with open(PATH+'\\output.xml', 'w+') as xml_file:
         xml_file.write(output_xml)
-
 
 # build_output_xml_file()

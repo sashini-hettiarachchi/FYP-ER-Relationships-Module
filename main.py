@@ -1,8 +1,4 @@
-from src.features import identify_relationship
-from src.features import find_cardinality
-from src.features import create_er_xml_file
-from src.features import map_er_to_relational_schema
-from src.features import draw_er
+from src import draw_er, identify_relationship, find_cardinality, create_er_xml_file, map_er_to_relational_schema
 
 
 def create_er_diagram_xml_file():

@@ -2,7 +2,9 @@
 import xml.etree.ElementTree as ET
 import os
 
-text_file = open("G:\\FYP-new\\src\\data\\input_text.txt", "r")
+PATH = "G:\\FYP\\FYP-ER-Relationships-Module\\data"
+
+text_file = open(PATH+"\\input_text.txt", "r")
 
 if text_file.mode == 'r':
     # Read the scenario and covert that text file into lowercase
@@ -13,49 +15,50 @@ if text_file.mode == 'r':
 
 # Read input XML file
 def get_root_of_input_xml():
-    tree = ET.parse("G:\\FYP-new\\src\\data\\input_xml.xml")
+    tree = ET.parse(PATH+"\\input_xml.xml")
     root = tree.getroot()
     return root
 
 
 def get_root_of_er_xml():
-    tree = ET.parse('G:\\FYP-new\\src\\data\\first_output.xml')
+    tree = ET.parse(PATH+'\\first_output.xml')
     root = tree.getroot()
     print(root)
     return root
 
+
 def remove_files():
-    if os.path.exists("G:\\FYP-new\\src\\data\\first_output.xml"):
-        os.remove("G:\\FYP-new\\src\\data\\first_output.xml")
+    if os.path.exists(PATH+"\\first_output.xml"):
+        os.remove(PATH+"\\first_output.xml")
     else:
         print('first_output.xml does not exit')
 
-    if os.path.exists("G:\\FYP-new\\src\\data\\er.csv"):
-        os.remove("G:\\FYP-new\\src\\data\\er.csv")
+    if os.path.exists(PATH+"\\er.csv"):
+        os.remove(PATH+"\\er.csv")
     else:
         print('er.csv does not exit')
 
-    if os.path.exists("G:\\FYP-new\\src\\data\\er.txt"):
-        os.remove("G:\\FYP-new\\src\\data\\er.txt")
+    if os.path.exists(PATH+"\\er.txt"):
+        os.remove(PATH+"\\er.txt")
     else:
         print('er.txt does not exit')
 
-    if os.path.exists("G:\\FYP-new\\src\\data\\output.json"):
-        os.remove("G:\\FYP-new\\src\\data\\output.json")
+    if os.path.exists(PATH+"\\output.json"):
+        os.remove(PATH+"\\output.json")
     else:
         print('output.json does not exit')
 
-    if os.path.exists("G:\\FYP-new\\src\\data\\output.xml"):
-        os.remove("G:\\FYP-new\\src\\data\\output.xml")
+    if os.path.exists(PATH+"\\output.xml"):
+        os.remove(PATH+"\\output.xml")
     else:
         print('output.xml does not exit')
 
-    if os.path.exists("G:\\FYP-new\\src\\data\\relation.json"):
-        os.remove("G:\\FYP-new\\src\\data\\relation.json")
+    if os.path.exists(PATH+"\\relation.json"):
+        os.remove(PATH+"\\relation.json")
     else:
         print('relation.json does not exit')
 
-    if os.path.exists("G:\\FYP-new\\src\\data\\relation.xml"):
-        os.remove("G:\\FYP-new\\src\\data\\relation.xml")
+    if os.path.exists(PATH+"\\relation.xml"):
+        os.remove(PATH+"\\relation.xml")
     else:
         print('relation.xml does not exit')

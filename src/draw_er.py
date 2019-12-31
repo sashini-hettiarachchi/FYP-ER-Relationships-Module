@@ -17,7 +17,7 @@ DERIVED_SHAPE = 'ellipse;whiteSpace=wrap;html=1;align=center;dashed=1;'
 
 
 def create_csv_file():
-    with open('src\\data\\er.csv', 'w+', newline='') as file:
+    with open(file_manipulation.PATH+'\\er.csv', 'w+', newline='') as file:
         fieldnames = ["node", "fill", "stroke", "shape", "one", "many", "attri", "compo"]
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
@@ -98,12 +98,12 @@ def create_csv_file():
 def create_draw_text_file():
     create_csv_file()
     text_list = []
-    with open('src\\data\\er.csv', "r") as my_input_file:
+    with open(file_manipulation.PATH+'\\er.csv', "r") as my_input_file:
         for line in my_input_file:
             # line = line.split(",", 2)
             text_list.append("".join(line))
 
-    with open('src\\data\\er.txt', "a") as my_output_file:
+    with open(file_manipulation.PATH+'\\er.txt', "a") as my_output_file:
         my_output_file.write("""# label: %node%
 # style: shape=%shape%;fillColor=%fill%;strokeColor=%stroke%;
 # namespace: csvimport-

@@ -1,7 +1,7 @@
 import nltk
 import re
 from utils.file_manipulation import get_root_of_input_xml
-from common.common_nlp import stopWords, text_into_sentence, sentences_into_word, lemmatizer
+from pre_process.common_nlp import stopWords, text_into_sentence, sentences_into_word, lemmatizer
 
 filtered_sentence_list = []
 relationship_identified_sentence_list = []

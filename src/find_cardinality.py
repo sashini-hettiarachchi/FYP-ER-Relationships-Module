@@ -1,9 +1,9 @@
-from src.features.identify_relationship import binary_relationship_dic_list
+from src.identify_relationship import binary_relationship_dic_list
 import nltk
 import inflect
 import re
 from utils.file_manipulation import get_root_of_input_xml
-from common.common_nlp import lemmatizer, text_into_sentence
+from pre_process.common_nlp import lemmatizer, text_into_sentence
 
 one_to_one_relationship_list = []
 one_to_many_relationship_list = []

@@ -126,4 +126,4 @@ def find_attributes():
                 print(tempChild.attrib.get('name'))
 
 
-# entity_combined_with_scenario()
+entity_combined_with_scenario()

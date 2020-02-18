@@ -1,4 +1,4 @@
-from src import draw_er, identify_relationship, find_cardinality, create_er_xml_file, map_er_to_relational_schema
+from src import draw_er, identify_relationship, find_cardinality, create_er_xml_file, map_er_to_relational_schema,get_output_data
 
 
 def create_er_diagram_xml_file():
@@ -26,6 +26,12 @@ def create_er_diagram_text_file():
         print("Er Diagram text file creation error", e)
         return e
 
+# def get_reelationship_list():
+#     try:
+#         get_output_data.get_relationship_list()
+#     except BaseException as e:
+#         print("Er Diagram text file creation error", e)
+#         return e
 
 
 

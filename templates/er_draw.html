@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ER Diagram</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <form action="{{ url_for('list_change') }}" method="post">
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label>Member 1</label>
+            </div>
+            <div class="form-group col-md-2">
+                <label>Member 2</label>
+            </div>
+            <div class="form-group col-md-2">
+                <label>Relationship</label>
+            </div>
+            <div class="form-group col-md-2">
+                <label>Cardinality </label>
+            </div>
+        </div>
+        {% for data in relationship_data %}
+
+            <div class="form-row">
+
+                <div class="form-group col-md-2">
+                    <!--  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                      <label class="form-check-label" for="inlineCheckbox1">Test 1</label> -->
+                    {#                    <label>{{ data['entity1'] }}</label>#}
+                    <input type="text" placeholder="{{ data['entity1'] }}">
+                </div>
+                <div class="form-group col-md-2">
+                    {#                    <label>{{ data['entity2'] }}</label>#}
+                    <input type="text" placeholder="{{ data['entity2'] }}">
+                </div>
+                <div class="form-group col-md-2">
+                    {#                    <label>{{ data['relationship'] }} </label>#}
+                    <input type="text" placeholder="{{ data['relationship'] }}">
+                </div>
+
+                <div class="form-group col-md-2">
+
+                    <select id="inputState" class="form-control">
+                        {% if data['cardinality'] == 'one_to_one' %}
+                            <option selected>One to One</option>
+                        {% else %}
+                            <option>One to One</option>
+                        {% endif %}
+                        {% if data['cardinality'] == 'one_to_many' %}
+                            <option selected>One to Many</option>
+                        {% else %}
+                            <option>One to Many</option>
+                        {% endif %}
+                        {% if data['cardinality'] == 'many_to_many' %}
+                            <option selected>Many to Many</option>
+                        {% else %}
+                            <option>Many to Many</option>
+                        {% endif %}
+
+
+                    </select>
+
+                </div>
+                <div class="col-auto">
+                    <a href="#">
+                        <button type="submit" class="btn btn-primary mb-2" name="submit_button" id="update_list"
+                                value="update_list">Update
+                        </button>
+                    </a>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary mb-2" name="submit_button" value="delete_item">Delete
+                    </button>
+                </div>
+
+            </div>
+        {% endfor %}
+    </form>
+
+</div>
+<script>
+    let relationship_data;
+    $.ajax({
+    url: "/list_change",
+    type: "POST",
+    contentType: "application/json;charset=UTF-8",
+    dataType: "json",
+    data: JSON.stringify({html_data: relationship_data}),
+    success: function(response) {
+        console.log(response);
+    },
+});
+</script>
+</body>
+</html>

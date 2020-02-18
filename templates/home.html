@@ -1,38 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Home</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-</head>
-<body>
+    <title>Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"> </script>
 
+</head>
+<body style="background: url(http://getwallpapers.com/wallpaper/full/c/4/7/489350.jpg) no-repeat center center fixed;">
+<!--
 <div class="container">
     <div class="row">
         <div class="col">
-            <h1>ER Generator</h1>
+            <h1 style="text-align: center; color: honeydew">ER Generator</h1>
         </div>
     </div>
     <div class="row">
         <div class="col">
             <div class="form-group">
                 <form action="{{ url_for('submit') }}" method="post">
-                    <label >Add Requirement Scenario:</label>
-                    <textarea class="form-control" rows="15" id="text-scenario" name="scenario"></textarea>
-                    <br>
-                    <button type="submit" class="btn btn-warning mb-2" name="submit_btn" value="add-text">Add Text </button>
-                    <button type="submit" class="btn btn-success mb-2" name="submit_btn" value="generate-er">Draw ER </button>
-                    <button type="submit" class="btn btn-primary mb-2" name="submit_btn" value="query-generator"> Query Generator</button>
-                    <button type="submit" class="btn btn-danger mb-2" name="submit_btn" value="clear-all"> Clear All</button>
+                    <button type="submit" class="btn btn-lg btn-success mb-2" name="submit_btn" value="generate-er" style="border-radius: 40px;">Draw ER </button>
+                    <button type="submit" class="btn btn-lg btn-primary mb-2" name="submit_btn" value="query-generator" style="border-radius: 40px;"> Generate Schema</button>
+                    <button type="submit" class="btn btn-lg btn-danger mb-2" name="submit_btn" value="clear-all" style="border-radius: 40px;"> Clear All</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+-->
+<header class="masthead">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center justify-content-center text-center">
+            <div class="col-lg-10 align-self-end">
+                <h1 class="text-uppercase text-white font-weight-bold mt-5">ER Generator</h1>
+                <hr class="divider my-4">
+            </div>
+            <div class="col-lg-8 align-self-baseline">
+                <h3 class="bg-gradient-light text-dark mb-5">This system is able to identify entities,
+                    attributes,attribute types, relationships and cardinalities of the relationships and generate an
+                    Entity Relationship Diagram for a given scenario and generate possible SQL queries for the natural
+                    language querying questions that follows the same scenario.</h3>
+                <div class="form-group">
+                    <form action="{{ url_for('submit') }}" method="post" id="submit-form">
+                        <!-- Button trigger modal -->
+                        <button type="submit"  class="btn btn-lg btn-success mr-3" data-toggle="modal"
+                                data-target="#exampleModalScrollable" style="border-radius: 40px;" value="generate-er" name="submit_btn">
+                            Draw ER Diagram 1
+                        </button>
+                        <button type="submit" class="btn btn-lg btn-primary mr-3" name="submit_btn"
+                                value="query-generator" style="border-radius: 40px;"> Generate Relational Schema
+                        </button>
+                        <button type="submit" class="btn btn-lg btn-danger mr-3" name="submit_btn" value="clear-all"
+                                style="border-radius: 40px;"> Clear All Data
+                        </button>
+
+
+                        <!-- Modal
+                        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalScrollableTitle">Correct Details</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="inputEmail4">Identified Relationships</label>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="inputPassword4">Identified Cardinality Type</label>
+
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                                    <label class="form-check-label" for="inlineCheckbox1">Test 1</label>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <select id="inputState" class="form-control">
+                                                        <option selected>One to One</option>
+                                                        <option>One to Many</option>
+                                                        <option>Many to Many</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                        </button>
+                                        <button type="submit" class="btn btn-primary" name="submit_btn"
+                                                value="re-generate-er"
+                                                data-toggle="modal" data-target="#exampleModalScrollable">
+                                            renhjii
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                     -->
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
 
 </body>
 </html>

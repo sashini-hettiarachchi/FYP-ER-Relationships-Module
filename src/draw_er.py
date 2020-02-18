@@ -103,7 +103,7 @@ def create_draw_text_file():
             # line = line.split(",", 2)
             text_list.append("".join(line))
 
-    with open(file_manipulation.PATH+'\\er.txt', "a") as my_output_file:
+    with open(file_manipulation.PATH+'\\er.txt', "w") as my_output_file:
         my_output_file.write("""# label: %node%
 # style: shape=%shape%;fillColor=%fill%;strokeColor=%stroke%;
 # namespace: csvimport-
@@ -125,4 +125,4 @@ def create_draw_text_file():
             my_output_file.write("" + line)
         print('Successfully created ER file')
 
-# create_draw_text_file()
+create_draw_text_file()

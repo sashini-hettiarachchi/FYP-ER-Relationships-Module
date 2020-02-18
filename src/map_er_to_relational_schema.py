@@ -245,8 +245,9 @@ def unary_many_to_many_relationship_mapping():
 
 def ternary_relationship_mapping():
     root = xml_input_handling()
-    column = []
+
     for relationship in root.findall('relation'):
+        column = []
         if relationship.get('degree') == 'ternary':
             for member1 in relationship.findall('member1'):
                 primary_key_member1 = member1.get('primary_key')
@@ -297,4 +298,4 @@ def build_output_xml_file():
     with open(PATH+'\\output.xml', 'w+') as xml_file:
         xml_file.write(output_xml)
 
-# build_output_xml_file()
+build_output_xml_file()

@@ -1,4 +1,4 @@
-from src.identify_relationship import binary_relationship_dic_list
+from src.identify_relationship import binary_relationship_dic_list, ternary_relationship_list
 import nltk
 import inflect
 import re
@@ -8,12 +8,15 @@ from pre_process.common_nlp import lemmatizer, text_into_sentence
 one_to_one_relationship_list = []
 one_to_many_relationship_list = []
 many_to_many_relationship_list = []
-relation = []
+binary_relation_list = []
+ternary_relation_list = []
+relation_list = []
 
 p = inflect.engine()
 
+print(ternary_relationship_list)
 
-def remove_duplicate_of_relationship_list():
+def remove_duplicate_of_relationship_list_binary():
     new_list = []
     for dic in binary_relationship_dic_list:
 
@@ -61,7 +64,7 @@ def remove_duplicate_of_relationship_list():
     return binary_relationship_dic_list
 
 
-def get_sentences_match_with_entities(member1, member2, relationship):
+def get_sentences_match_with_entities_binary(member1, member2, relationship):
     matching_sentences_list = []
     sentence_list = text_into_sentence()
 
@@ -125,10 +128,9 @@ def find_primary_key(member):
                     return attri_ref.get('name')
 
 
-def find_cardinality():
-    new_relationship_dic_list = remove_duplicate_of_relationship_list()
-
-    for dic in new_relationship_dic_list:
+def get_binary_cardinality_list():
+    new_relationship_dic_list_binary = remove_duplicate_of_relationship_list_binary()
+    for dic in new_relationship_dic_list_binary:
         plural_member1 = dic.get('member1')
         # print(member1)
 
@@ -136,7 +138,7 @@ def find_cardinality():
         # print(member2)
         relationship = dic.get('relationship')
         # print(relationship)
-        sentence_list = get_sentences_match_with_entities(plural_member1, plural_member2, relationship)
+        sentence_list = get_sentences_match_with_entities_binary(plural_member1, plural_member2, relationship)
         sentence_set = list(set(sentence_list))
         # print(sentence_set)
         member1_primary_key = find_primary_key(plural_member1)
@@ -151,29 +153,33 @@ def find_cardinality():
 
             if find_cardinality_many(plural_member2, sentence_set):
 
-                relation.append({"@name": relationship, "@degree": "binary", "@type": "many_to_many",
-                                 "member1": {"@name": singular_member1, "@cardinality": "many",
-                                             "@primary_key": member1_primary_key},
-                                 "member2": {"@name": singular_member2, "@cardinality": "many",
-                                             "@primary_key": member2_primary_key}})
+                binary_relation_list.append({"@name": relationship, "@degree": "binary", "@type": "many_to_many",
+                                             "member1": {"@name": singular_member1, "@cardinality": "many",
+                                                         "@primary_key": member1_primary_key},
+                                             "member2": {"@name": singular_member2, "@cardinality": "many",
+                                                         "@primary_key": member2_primary_key}})
             elif find_cardinality_one(plural_member2, sentence_set, relationship):
-                relation.append(
+                binary_relation_list.append(
                     {"@name": relationship, "@degree": "binary", "@type": "one_to_many",
-                     "member1": {"@name": singular_member1, "@cardinality": "many", "@primary_key": member1_primary_key},
-                     "member2": {"@name": singular_member2, "@cardinality": "one", "@primary_key": member2_primary_key}})
+                     "member1": {"@name": singular_member1, "@cardinality": "many",
+                                 "@primary_key": member1_primary_key},
+                     "member2": {"@name": singular_member2, "@cardinality": "one",
+                                 "@primary_key": member2_primary_key}})
         elif find_cardinality_one(plural_member1, sentence_set, relationship):
             if find_cardinality_many(plural_member2, sentence_set):
                 singular_member1 = lemmatizer.lemmatize(plural_member1)
                 singular_member2 = lemmatizer.lemmatize(plural_member2)
-                relation.append(
+                binary_relation_list.append(
                     {"@name": relationship, "@degree": "binary", "@type": "one_to_many",
                      "member1": {"@name": singular_member1, "@cardinality": "one", "@primary_key": member1_primary_key},
-                     "member2": {"@name": singular_member2, "@cardinality": "many", "@primary_key": member2_primary_key}})
+                     "member2": {"@name": singular_member2, "@cardinality": "many",
+                                 "@primary_key": member2_primary_key}})
             elif find_cardinality_one(plural_member2, sentence_set, relationship):
-                relation.append(
+                binary_relation_list.append(
                     {"@name": relationship, "@degree": "binary", "@type": "one_to_one",
                      "member1": {"@name": singular_member1, "@cardinality": "one", "@primary_key": member1_primary_key},
-                     "member2": {"@name": singular_member2, "@cardinality": "one", "@primary_key": member2_primary_key}})
+                     "member2": {"@name": singular_member2, "@cardinality": "one",
+                                 "@primary_key": member2_primary_key}})
 
         #     ...............................
 
@@ -195,8 +201,140 @@ def find_cardinality():
     # print("1 2 1", one_to_one_relationship_list)
     # print("1 2 M", one_to_many_relationship_list)
     # print("M 2 M", many_to_many_relationship_list)
-    print("rel", relation)
-    return relation
+    print("rel", binary_relation_list)
+    return binary_relation_list
+
+
+def get_sentences_match_with_entities_ternary(member1, member2, member3, relation):
+    match_ternary_sentence_list = []
+    regex = r"(" + re.escape(member1) + "|" + re.escape(member2) + "|" + re.escape(member3) + ")" + "(.*)" + re.escape(
+        relation) + "(.*)" + "(" + re.escape(member1) + "|" + re.escape(member2) + "|" + re.escape(
+        member3) + ")" + "(.*)" + "(" + re.escape(member1) + "|" + re.escape(member2) + "|" + re.escape(member3) + ")"
+    print(regex)
+    sentence_list = text_into_sentence()
+    for sentence in sentence_list:
+        if re.search(regex, sentence, re.MULTILINE | re.IGNORECASE):
+            match_ternary_sentence_list.append(sentence)
+            print("*************", sentence)
+
+    return match_ternary_sentence_list
+
+
+def get_ternary_cardinality_list():
+    for dic in ternary_relationship_list:
+        member1 = dic.get('member1')
+        member2 = dic.get('member2')
+        member3 = dic.get('member3')
+        relation = dic.get('relationship')
+
+        sentence_list = get_sentences_match_with_entities_ternary(member1, member2, member3, relation)
+
+        member1_primary_key = find_primary_key(member1)
+        member2_primary_key = find_primary_key(member2)
+        member3_primary_key = find_primary_key(member3)
+
+        singular_member1 = lemmatizer.lemmatize(member1)
+        singular_member2 = lemmatizer.lemmatize(member2)
+        singular_member3 = lemmatizer.lemmatize(member3)
+
+        if find_cardinality_many(member1, sentence_list):
+
+            if find_cardinality_many(member2, sentence_list):
+
+                if find_cardinality_many(member3, sentence_list):
+
+                    ternary_relation_list.append(
+                        {"@name": relation, "@degree": "ternary", "@type": "many_to_many_to_many",
+                         "member1": {"@name": singular_member1, "@cardinality": "many",
+                                     "@primary_key": member1_primary_key},
+                         "member3": {"@name": singular_member3, "@cardinality": "many",
+                                     "@primary_key": member3_primary_key},
+                         "member2": {"@name": singular_member2, "@cardinality": "many",
+                                     "@primary_key": member2_primary_key}}),
+                elif find_cardinality_one(member3, sentence_list, relation):
+                    ternary_relation_list.append(
+                        {"@name": relation, "@degree": "ternary", "@type": "many_to_many_to_one",
+                         "member1": {"@name": singular_member1, "@cardinality": "many",
+                                     "@primary_key": member1_primary_key},
+                         "member3": {"@name": singular_member3, "@cardinality": "one",
+                                     "@primary_key": member3_primary_key},
+                         "member2": {"@name": singular_member2, "@cardinality": "many",
+                                     "@primary_key": member2_primary_key}}),
+            elif find_cardinality_one(member2, sentence_list, relation):
+                if find_cardinality_many(member3, sentence_list):
+
+                    ternary_relation_list.append(
+                        {"@name": relation, "@degree": "ternary", "@type": "many_to_many_to_one",
+                         "member1": {"@name": singular_member1, "@cardinality": "many",
+                                     "@primary_key": member1_primary_key},
+                         "member3": {"@name": singular_member3, "@cardinality": "many",
+                                     "@primary_key": member3_primary_key},
+                         "member2": {"@name": singular_member2, "@cardinality": "one",
+                                     "@primary_key": member2_primary_key}}),
+                elif find_cardinality_one(member3, sentence_list, relation):
+                    ternary_relation_list.append(
+                        {"@name": relation, "@degree": "ternary", "@type": "many_to_one_to_one",
+                         "member1": {"@name": singular_member1, "@cardinality": "many",
+                                     "@primary_key": member1_primary_key},
+                         "member3": {"@name": singular_member3, "@cardinality": "one",
+                                     "@primary_key": member3_primary_key},
+                         "member2": {"@name": singular_member2, "@cardinality": "one",
+                                     "@primary_key": member2_primary_key}})
+
+        elif find_cardinality_one(member1, sentence_list, relation):
+            if find_cardinality_many(member2, sentence_list):
+                if find_cardinality_many(member3, sentence_list):
+                    ternary_relation_list.append(
+                        {"@name": relation, "@degree": "ternary", "@type": "many_to_many_to_one",
+                         "member1": {"@name": singular_member1, "@cardinality": "one",
+                                     "@primary_key": member1_primary_key},
+                         "member3": {"@name": singular_member3, "@cardinality": "many",
+                                     "@primary_key": member3_primary_key},
+                         "member2": {"@name": singular_member2, "@cardinality": "many",
+                                     "@primary_key": member2_primary_key}}),
+                elif find_cardinality_one(member3, sentence_list, relation):
+                    ternary_relation_list.append(
+                        {"@name": relation, "@degree": "ternary", "@type": "many_to_one_to_one",
+                         "member1": {"@name": singular_member1, "@cardinality": "one",
+                                     "@primary_key": member1_primary_key},
+                         "member3": {"@name": singular_member3, "@cardinality": "one",
+                                     "@primary_key": member3_primary_key},
+                         "member2": {"@name": singular_member2, "@cardinality": "many",
+                                     "@primary_key": member2_primary_key}})
+            elif find_cardinality_one(member2, sentence_list, relation):
+                if find_cardinality_many(member3, sentence_list):
+                    ternary_relation_list.append(
+                        {"@name": relation, "@degree": "ternary", "@type": "many_to_one_to_one",
+                         "member1": {"@name": singular_member1, "@cardinality": "one",
+                                     "@primary_key": member1_primary_key},
+                         "member3": {"@name": singular_member3, "@cardinality": "many",
+                                     "@primary_key": member3_primary_key},
+                         "member2": {"@name": singular_member2, "@cardinality": "one",
+                                     "@primary_key": member2_primary_key}}),
+                elif find_cardinality_one(member3, sentence_list, relation):
+                    ternary_relation_list.append(
+                        {"@name": relation, "@degree": "ternary", "@type": "one_to_one_to_one",
+                         "member1": {"@name": singular_member1, "@cardinality": "one",
+                                     "@primary_key": member1_primary_key},
+                         "member3": {"@name": singular_member3, "@cardinality": "one",
+                                     "@primary_key": member3_primary_key},
+                         "member2": {"@name": singular_member2, "@cardinality": "one",
+                                     "@primary_key": member2_primary_key}})
+    return ternary_relation_list
+
+
+def find_cardinality():
+    binary_cardinality_list = get_binary_cardinality_list()
+    ternary_cardinality_list = get_ternary_cardinality_list()
+
+    print("### Binary ###", binary_cardinality_list)
+    print("### Ternary ####", ternary_cardinality_list)
+
+    relation_list = binary_cardinality_list + ternary_cardinality_list
+
+    print(relation_list)
+
+    return relation_list
 
 
 def find_cardinality_one(member, sentence_list, relationship):

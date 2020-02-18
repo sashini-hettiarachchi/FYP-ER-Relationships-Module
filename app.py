@@ -6,7 +6,7 @@ from utils import file_manipulation
 app = Flask(__name__)
 
 
-@app.route('/relationship')
+@app.route('/api/relationship')
 def return_data():
     main.create_er_diagram_xml_file()
     main.create_er_diagram_text_file()

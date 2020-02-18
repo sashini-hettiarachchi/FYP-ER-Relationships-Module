@@ -125,4 +125,4 @@ def create_draw_text_file():
             my_output_file.write("" + line)
         print('Successfully created ER file')
 
-# create_draw_text_file()
+create_draw_text_file()

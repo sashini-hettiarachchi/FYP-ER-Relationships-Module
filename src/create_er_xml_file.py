@@ -1,6 +1,6 @@
 import json
 import xmltodict
-from src.find_cardinality import relation
+from src.find_cardinality import find_cardinality
 import glob
 from xml.etree import ElementTree
 from utils.file_manipulation import PATH
@@ -27,8 +27,9 @@ def run(folder):
 
 def create_output_xml_file():
     # print(relation)
-
-    output_dic = {'er': {'relation': relation}}
+    relation_list =  find_cardinality()
+    print(relation_list)
+    output_dic = {'er': {'relation': relation_list}}
 
     with open(PATH+'\\relation.json', 'w+') as json_file:
         json.dump(output_dic, json_file, indent=4, sort_keys=True)
@@ -40,4 +41,4 @@ def create_output_xml_file():
 
     run(folder)
 
-# create_output_xml_file()
+create_output_xml_file()

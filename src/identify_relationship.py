@@ -1,3 +1,5 @@
+import random
+
 import nltk
 import re
 from utils.file_manipulation import get_root_of_input_xml
@@ -8,7 +10,11 @@ relationship_identified_sentence_list = []
 sentence_list_has_entities = []
 binary_relationship_dic_list = []
 unary_relationship_dic_list = []
+ternary_relationship_list = []
+
 new_word_list = []
+
+regex_for_verb_tags = r"VB[GDPNZP]?"
 
 
 def find_entities(word):
@@ -37,16 +43,91 @@ def entity_combined_with_scenario():
         if len(entity_list) >= 2:
             # Remove duplicates in entity list
             duplicate_removed_entity_list = list(set(entity_list))
+            if len(duplicate_removed_entity_list) > 2:
+                for entity in duplicate_removed_entity_list:
+                    lem_entity = lemmatizer.lemmatize(entity)
+                    new_list = duplicate_removed_entity_list[duplicate_removed_entity_list.index(entity)+1 : len(entity_list)]
+                    print(new_list)
+                    for entity_1 in new_list:
+                        lem_entity_1 = lemmatizer.lemmatize(entity_1)
+                        if entity_1 == lem_entity:
+                            duplicate_removed_entity_list.remove(lem_entity)
+                            break
+                        elif entity == lem_entity_1:
+                            duplicate_removed_entity_list.remove(entity)
+                            break
+            # duplicate_removed_entity_list = list(set(entity_list))
             find_relationship(duplicate_removed_entity_list, sentence)
+            print("+++++++++")
 
 
 def find_relationship(entity_list, sentence):
+    global ternary_relationship_list
     word_list = sentences_into_word(sentence)
     pos_tag_list = nltk.pos_tag(word_list)
     entity_and_index_list = []
     if len(entity_list) == 1:
         print("Unary", entity_list)
         # print(sentence)
+    elif len(entity_list) == 3:
+        member1 = entity_list[0]
+        member2 = entity_list[1]
+        member3 = entity_list[2]
+
+        regex_3_for_identify_related_sentence_part = r"(" + re.escape(member1) + "|" + re.escape(
+            member2) + "|" + re.escape(member3) + ")" + "(.*)" + "(" + re.escape(
+            member1) + "|" + re.escape(member2) + "|" + re.escape(member3) + ")"
+        matches = re.finditer(regex_3_for_identify_related_sentence_part, sentence,
+                              re.MULTILINE | re.IGNORECASE)
+        verb_list = []
+        for matchNum, match in enumerate(matches, start=1):
+            for groupNum in range(0, len(match.groups())):
+                print(match.group(2))
+
+                relationship_content_sentence_part = match.group(2)
+                word_list_1 = sentences_into_word(relationship_content_sentence_part)
+                pos_tag_list_1 = nltk.pos_tag(word_list_1)
+                print(pos_tag_list_1)
+                for word in pos_tag_list_1:
+                    if re.search(regex_for_verb_tags, word[1]):
+                        verb_list.append(word[0])
+
+        # print(verb_list)
+        verb_set = set(verb_list)
+        without_duplicate_verb_list = list(verb_set)
+        if len(without_duplicate_verb_list) > 1:
+            for verb in without_duplicate_verb_list:
+                if verb == 'is' or verb == 'has' or verb == 'are' or verb == 'have':
+                    without_duplicate_verb_list.remove(verb)
+            # print(without_duplicate_verb_list)
+            ternary_relationship = random.choice(without_duplicate_verb_list)
+            # print(ternary_relationship)
+            relationship_dic_1 = {'member1': member1,
+                                  'relationship': ternary_relationship,
+                                  'member2': member2,
+                                  'member3': member3}
+        elif len(without_duplicate_verb_list) == 1:
+            ternary_relationship = verb_list[0]
+            relationship_dic_1 = {'member1': member1,
+                                  'relationship': ternary_relationship,
+                                  'member2': member2,
+                                  'member3': member3}
+            ternary_relationship_list.append(relationship_dic_1)
+        else:
+            for word in pos_tag_list:
+                if re.search(regex_for_verb_tags, word[1]):
+                    verb_list.append(word[0])
+            if len(verb_list) > 1:
+                ternary_relationship = random.choice(verb_list)
+            elif len(verb_list) == 1:
+                ternary_relationship = verb_list[0]
+            else:
+                ternary_relationship = "relate"
+            relationship_dic_1 = {'member1': member1,
+                                  'relationship': ternary_relationship,
+                                  'member2': member2,
+                                  'member3': member3}
+            ternary_relationship_list.append(relationship_dic_1)
     else:
         for data in pos_tag_list:
             for entity in entity_list:
@@ -65,8 +146,6 @@ def find_relationship(entity_list, sentence):
                             second_member)
                         regex_2_identify_entities = r"" + re.escape(second_member) + " (of each) " + re.escape(
                             first_member)
-
-                        regex_for_verb_tags = r"VB[GDPNZ]?"
 
                         temp_list = pos_tag_list[first_index: second_index]
                         relationship_list = []
@@ -106,8 +185,9 @@ def find_relationship(entity_list, sentence):
                                                 'member2': member2}
                             binary_relationship_dic_list.append(relationship_dic)
 
-        print(binary_relationship_dic_list)
-        return binary_relationship_dic_list
+        print("Binary",binary_relationship_dic_list)
+        print("Ternary",ternary_relationship_list)
+        return binary_relationship_dic_list, ternary_relationship_list
 
 
 def removing_stopwords(words):
@@ -127,3 +207,4 @@ def find_attributes():
 
 
 entity_combined_with_scenario()
+# find_relationship()

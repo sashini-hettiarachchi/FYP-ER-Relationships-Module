@@ -1,9 +1,10 @@
 import random
+import re
 
 import nltk
-import re
-from utils.file_manipulation import get_root_of_input_xml
+
 from pre_process.common_nlp import stopWords, text_into_sentence, sentences_into_word, lemmatizer
+from utils.file_manipulation import get_root_of_input_xml
 
 filtered_sentence_list = []
 relationship_identified_sentence_list = []
@@ -46,7 +47,8 @@ def entity_combined_with_scenario():
             if len(duplicate_removed_entity_list) > 2:
                 for entity in duplicate_removed_entity_list:
                     lem_entity = lemmatizer.lemmatize(entity)
-                    new_list = duplicate_removed_entity_list[duplicate_removed_entity_list.index(entity)+1 : len(entity_list)]
+                    new_list = duplicate_removed_entity_list[
+                               duplicate_removed_entity_list.index(entity) + 1: len(entity_list)]
                     print(new_list)
                     for entity_1 in new_list:
                         lem_entity_1 = lemmatizer.lemmatize(entity_1)
@@ -67,8 +69,20 @@ def find_relationship(entity_list, sentence):
     pos_tag_list = nltk.pos_tag(word_list)
     entity_and_index_list = []
     if len(entity_list) == 1:
-        print("Unary", entity_list)
-        # print(sentence)
+        member = entity_list[0]
+        regex_for_unary = r"(.*)(" + re.escape(member) + ")(.*,.*,.*)(" + re.escape(member) + ")(.*)"
+        print("Unary", entity_list, "sentence", sentence)
+        if not (re.search(regex_for_unary, sentence)):
+            relationship_list = []
+            for word in pos_tag_list:
+                if re.search(regex_for_verb_tags, word[1]):
+                    relationship_list.append(word[0])
+            if len(relationship_list) > 1:
+                relationship = random.choice(relationship_list)
+            else:
+                relationship = relationship_list[0]
+            unary_relationship_dic_list.append({"member": member, "relationship": relationship, "sentence": sentence})
+            print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%", unary_relationship_dic_list)
     elif len(entity_list) == 3:
         member1 = entity_list[0]
         member2 = entity_list[1]
@@ -185,9 +199,10 @@ def find_relationship(entity_list, sentence):
                                                 'member2': member2}
                             binary_relationship_dic_list.append(relationship_dic)
 
-        print("Binary",binary_relationship_dic_list)
-        print("Ternary",ternary_relationship_list)
-        return binary_relationship_dic_list, ternary_relationship_list
+        print("Binary", binary_relationship_dic_list)
+        print("Ternary", ternary_relationship_list)
+        print("Unary", unary_relationship_dic_list)
+        return binary_relationship_dic_list, ternary_relationship_list, unary_relationship_dic_list
 
 
 def removing_stopwords(words):
@@ -206,5 +221,5 @@ def find_attributes():
                 print(tempChild.attrib.get('name'))
 
 
-entity_combined_with_scenario()
+# entity_combined_with_scenario()
 # find_relationship()

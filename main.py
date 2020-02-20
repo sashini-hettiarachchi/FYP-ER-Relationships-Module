@@ -4,7 +4,7 @@ from src import draw_er, identify_relationship, find_cardinality, create_er_xml_
 def create_er_diagram_xml_file():
     try:
         identify_relationship.entity_combined_with_scenario()
-        find_cardinality.find_cardinality()
+        # find_cardinality.find_cardinality()
         create_er_xml_file.create_output_xml_file()
     except BaseException as e:
         print("Er Diagram XML file creation error", e)
@@ -25,6 +25,14 @@ def create_er_diagram_text_file():
     except BaseException as e:
         print("Er Diagram text file creation error", e)
         return e
+
+
+# def re_create_relationship_xml():
+#     try:
+#         create_er_xml_file.recreate_relation_xml()
+#     except BaseException as e:
+#         print("Er Diagram text file creation error", e)
+#         return e
 
 # def get_reelationship_list():
 #     try:

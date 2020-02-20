@@ -1,9 +1,12 @@
-from src.identify_relationship import binary_relationship_dic_list, ternary_relationship_list
-import nltk
-import inflect
 import re
-from utils.file_manipulation import get_root_of_input_xml
+
+import inflect
+import nltk
+
 from pre_process.common_nlp import lemmatizer, text_into_sentence
+from src.identify_relationship import binary_relationship_dic_list, ternary_relationship_list, \
+    unary_relationship_dic_list
+from utils.file_manipulation import get_root_of_input_xml
 
 one_to_one_relationship_list = []
 one_to_many_relationship_list = []
@@ -15,6 +18,7 @@ relation_list = []
 p = inflect.engine()
 
 print(ternary_relationship_list)
+
 
 def remove_duplicate_of_relationship_list_binary():
     new_list = []
@@ -323,14 +327,31 @@ def get_ternary_cardinality_list():
     return ternary_relation_list
 
 
+def get_unary_cardinality_list():
+    unary_cardinality_list = []
+    for dic in unary_relationship_dic_list:
+        relation = dic.get('relationship')
+        member = dic.get("member")
+        primary_key = find_primary_key(member)
+        unary_cardinality_list.append({"@name": relation, "@degree": "unary", "@type": "one_to_one",
+                                       "member1": {"@name": member, "@cardinality": "one",
+                                                   "@primary_key": primary_key},
+                                       "member2": {"@name": member, "@cardinality": "one",
+                                                   "@primary_key": primary_key}})
+    print(unary_cardinality_list)
+    return unary_cardinality_list
+
+
 def find_cardinality():
     binary_cardinality_list = get_binary_cardinality_list()
     ternary_cardinality_list = get_ternary_cardinality_list()
+    unary_cardinality_list = get_unary_cardinality_list()
 
     print("### Binary ###", binary_cardinality_list)
     print("### Ternary ####", ternary_cardinality_list)
+    print("### Unary ####", unary_cardinality_list)
 
-    relation_list = binary_cardinality_list + ternary_cardinality_list
+    relation_list = binary_cardinality_list + ternary_cardinality_list + unary_cardinality_list
 
     print(relation_list)
 
@@ -404,5 +425,4 @@ def find_cardinality_many(member, sentence_list):
 
         return value
 
-
-# find_cardinality()
+find_cardinality()

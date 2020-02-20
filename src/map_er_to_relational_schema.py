@@ -298,4 +298,4 @@ def build_output_xml_file():
     with open(PATH+'\\output.xml', 'w+') as xml_file:
         xml_file.write(output_xml)
 
-build_output_xml_file()
+# build_output_xml_file()

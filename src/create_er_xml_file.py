@@ -58,16 +58,16 @@ def recreate_relation_xml(er):
     relationships_list = []
     for dic in er:
         print(dic)
-        member1_name = dic.get("entity1")
+        member1_name = dic.get("entity1_name")
         member1_cardinality = dic.get("entity1_cardinality")
         member1_primary_key = dic.get("entity1_primary_key")
-        member2_name = dic.get("entity2")
+        member2_name = dic.get("entity2_name")
         member2_cardinality = dic.get("entity2_cardinality")
         member2_primary_key = dic.get("entity2_primary_key")
-        member3_name = dic.get("entity3")
+        member3_name = dic.get("entity3_name")
         member3_cardinality = dic.get("entity3_cardinality")
         member3_primary_key = dic.get("entity3_primary_key")
-        relationship = dic.get("relationship")
+        relationship = dic.get("relationship_name")
         cardinality = dic.get("cardinality")
         degree = dic.get("degree")
 

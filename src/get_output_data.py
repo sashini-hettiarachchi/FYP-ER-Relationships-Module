@@ -4,9 +4,10 @@ relationship_dic_list = []
 
 
 def get_relationship_list():
-    global member1_name, member2_name, member1_cardinality, member1_primary_key, member2_cardinality, member2_primary_key
+    global member1_name, member2_name, member1_cardinality, member1_primary_key, member2_cardinality, member2_primary_key, member3_name, member3_primary_key, member3_cardinality
 
     root = file_manipulation.get_root_of_er_xml()
+    i = 1
     for rel in root.findall('relation'):
         for member1 in rel.findall('member1'):
             member1_name = member1.get('name')
@@ -18,17 +19,49 @@ def get_relationship_list():
             member2_primary_key = member2.get('primary_key')
             member2_cardinality = member2.get('cardinality')
 
-        relationship_dic = {'relationship': rel.get('name'), 'cardinality': rel.get('type'),
-                            'degree': rel.get('degree'), 'entity1': member1_name,
-                            'entity1_cardinality': member1_cardinality, 'entity1_primary_key': member1_primary_key,
-                            'entity2': member2_name, 'entity2_cardinality': member2_cardinality,
-                            'entity2_primary_key': member2_primary_key}
-        for member3 in rel.findall('member3'):
-            member3_name = member3.get('name')
-            relationship_dic['entity3'] = member3_name
+        if rel.findall('member3'):
+            for member3 in rel.findall('member3'):
+                member3_name = member3.get('name')
+                member3_cardinality = member3.get('cardinality')
+                member3_primary_key = member3.get('primary_key')
+
+        else:
+            member3_name = "None"
+            member3_cardinality = "None"
+            member3_primary_key = "None"
+
+            # relationship_dic['entity3'] = member3_name
+            # relationship_dic['entity3_cardinality'] = member3_cardinality
+            # relationship_dic['entity3_primary_key'] = member3_primary_key
+
+        relationship_dic = {'id': i,
+                            'name': rel.get('name'),
+                            'type': rel.get('type'),
+                            'degree': rel.get('degree'),
+                            'entities': [
+                                {
+                                    'id': 1,
+                                    'name': member1_name,
+                                    'cardinality': member1_cardinality,
+                                    'primary_key': member1_primary_key
+                                },
+                                {
+                                    'id': 2,
+                                    'name': member2_name,
+                                    'cardinality': member2_cardinality,
+                                    'primary_key': member2_primary_key
+                                },
+                                {
+                                    'id': 3,
+                                    'name': member3_name,
+                                    'cardinality': member3_cardinality,
+                                    'primary_key': member3_primary_key
+                                }
+                            ]
+                            }
 
         relationship_dic_list.append(relationship_dic)
-
+        i = i + 1
     print(relationship_dic_list)
     return relationship_dic_list
 

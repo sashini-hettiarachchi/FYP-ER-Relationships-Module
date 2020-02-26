@@ -44,7 +44,7 @@ def entity_combined_with_scenario():
         if len(entity_list) >= 2:
             # Remove duplicates in entity list
             duplicate_removed_entity_list = list(set(entity_list))
-            if len(duplicate_removed_entity_list) > 2:
+            if len(duplicate_removed_entity_list) >= 2:
                 for entity in duplicate_removed_entity_list:
                     lem_entity = lemmatizer.lemmatize(entity)
                     new_list = duplicate_removed_entity_list[
@@ -69,10 +69,11 @@ def find_relationship(entity_list, sentence):
     pos_tag_list = nltk.pos_tag(word_list)
     entity_and_index_list = []
     if len(entity_list) == 1:
-        member = entity_list[0]
-        regex_for_unary = r"(.*)(" + re.escape(member) + ")(.*,.*,.*)(" + re.escape(member) + ")(.*)"
+        member = lemmatizer.lemmatize(entity_list[0])
+        regex_for_unary_1 = r"(.*)(" + re.escape(member) + ")(.*,.*,.*)(" + re.escape(member) + ")(.*)"
+        regex_for_unary_2 = r"(.*)(" + re.escape(member) + ")(.*)(" + re.escape(member) + ")(.*)(,)(.*)(,)(.*)"
         print("Unary", entity_list, "sentence", sentence)
-        if not (re.search(regex_for_unary, sentence)):
+        if (not (re.search(regex_for_unary_1, sentence))) and (not (re.search(regex_for_unary_2, sentence))):
             relationship_list = []
             for word in pos_tag_list:
                 if re.search(regex_for_verb_tags, word[1]):
@@ -120,6 +121,7 @@ def find_relationship(entity_list, sentence):
                                   'relationship': ternary_relationship,
                                   'member2': member2,
                                   'member3': member3}
+            ternary_relationship_list.append(relationship_dic_1)
         elif len(without_duplicate_verb_list) == 1:
             ternary_relationship = verb_list[0]
             relationship_dic_1 = {'member1': member1,
@@ -145,7 +147,7 @@ def find_relationship(entity_list, sentence):
     else:
         for data in pos_tag_list:
             for entity in entity_list:
-                if data[0] == entity:
+                if data[0] == entity or data[0] == lemmatizer.lemmatize(entity):
                     index = pos_tag_list.index(data)
 
                     entity_and_index_list.append({'member': entity, 'index': index})
@@ -219,7 +221,6 @@ def find_attributes():
         if temp_root.get('name') == 'driver':
             for tempChild in temp_root:
                 print(tempChild.attrib.get('name'))
-
 
 # entity_combined_with_scenario()
 # find_relationship()

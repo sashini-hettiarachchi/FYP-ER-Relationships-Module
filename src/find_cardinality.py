@@ -331,7 +331,8 @@ def get_unary_cardinality_list():
     unary_cardinality_list = []
     for dic in unary_relationship_dic_list:
         relation = dic.get('relationship')
-        member = dic.get("member")
+        plural_member = dic.get("member")
+        member = lemmatizer.lemmatize(plural_member)
         primary_key = find_primary_key(member)
         unary_cardinality_list.append({"@name": relation, "@degree": "unary", "@type": "one_to_one",
                                        "member1": {"@name": member, "@cardinality": "one",
@@ -425,4 +426,4 @@ def find_cardinality_many(member, sentence_list):
 
         return value
 
-find_cardinality()
+# find_cardinality()

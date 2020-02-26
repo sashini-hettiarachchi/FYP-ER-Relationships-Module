@@ -1,27 +1,29 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify, json
+from flask import Flask, request, jsonify, json
 import main
-from src import get_output_data,create_er_xml_file
+from src import get_output_data, create_er_xml_file
 from utils import file_manipulation
+from time import sleep
 
 app = Flask(__name__)
 
 
-@app.route('/api/er_data', methods=['GET','POST'])
+@app.route('/api/v1/relationships', methods=['GET'])
 def return_er_data():
     main.create_er_diagram_xml_file()
+    sleep(1)
     relationship_data = get_output_data.get_relationship_list()
     print("Successfully Generated ER Diagram")
     print(relationship_data)
     return jsonify(relationship_data)
 
 
-@app.route('/api/relational_schema')
+@app.route('/api/v1/schema', methods=['GET'])
 def generate_relational_schema():
     main.create_relational_schema()
     return '''<h1>Success</h1>'''
 
 
-@app.route('/api/create_er_csv', methods=['POST'])
+@app.route('/api/v1/csv', methods=['POST'])
 def create_er_csv():
     data = json.loads(request.data)
     er = data.get("er", None)
@@ -31,6 +33,14 @@ def create_er_csv():
     else:
         main.create_er_diagram_text_file()
         return jsonify(data)
+
+
+@app.route('/api/v1/clear', methods=['GET'])
+def clear_files():
+    file_manipulation.remove_files()
+    return '''<h1>Success</h1>'''
+
+
 
 # @app.route('/')
 # def home_page():

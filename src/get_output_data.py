@@ -26,9 +26,9 @@ def get_relationship_list():
                 member3_primary_key = member3.get('primary_key')
 
         else:
-            member3_name = "None"
-            member3_cardinality = "None"
-            member3_primary_key = "None"
+            member3_name = "none"
+            member3_cardinality = "none"
+            member3_primary_key = "none"
 
             # relationship_dic['entity3'] = member3_name
             # relationship_dic['entity3_cardinality'] = member3_cardinality
@@ -43,19 +43,19 @@ def get_relationship_list():
                                     'id': 1,
                                     'name': member1_name,
                                     'cardinality': member1_cardinality,
-                                    'primary_key': member1_primary_key
+                                    'primaryKey': member1_primary_key
                                 },
                                 {
                                     'id': 2,
                                     'name': member2_name,
                                     'cardinality': member2_cardinality,
-                                    'primary_key': member2_primary_key
+                                    'primaryKey': member2_primary_key
                                 },
                                 {
                                     'id': 3,
                                     'name': member3_name,
                                     'cardinality': member3_cardinality,
-                                    'primary_key': member3_primary_key
+                                    'primaryKey': member3_primary_key
                                 }
                             ]
                             }

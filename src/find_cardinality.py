@@ -20,6 +20,7 @@ p = inflect.engine()
 print(ternary_relationship_list)
 
 
+# remove the duplicate of binary relationship list
 def remove_duplicate_of_relationship_list_binary():
     new_list = []
     for dic in binary_relationship_dic_list:
@@ -68,6 +69,7 @@ def remove_duplicate_of_relationship_list_binary():
     return binary_relationship_dic_list
 
 
+# find sentences match with particular binary entity list
 def get_sentences_match_with_entities_binary(member1, member2, relationship):
     matching_sentences_list = []
     sentence_list = text_into_sentence()
@@ -82,6 +84,7 @@ def get_sentences_match_with_entities_binary(member1, member2, relationship):
 
     relationship_lem = lemmatizer.lemmatize(correct_relationship, pos="v")
 
+    # regular expressions for find relevant sentences
     regex_1 = r"" + re.escape(member1) + "(.*)" + re.escape(correct_relationship) + "(.*)" + re.escape(member2)
     regex_2 = r"" + re.escape(member1) + "(.*)" + re.escape(relationship_lem) + "(.*)" + re.escape(member2)
     regex_3 = r"" + re.escape(lem_member1) + "(.*)" + re.escape(correct_relationship) + "(.*)" + re.escape(member2)
@@ -211,6 +214,7 @@ def get_binary_cardinality_list():
 
 def get_sentences_match_with_entities_ternary(member1, member2, member3, relation):
     match_ternary_sentence_list = []
+    # regular expressions for find ternary relationships exist sentences
     regex = r"(" + re.escape(member1) + "|" + re.escape(member2) + "|" + re.escape(member3) + ")" + "(.*)" + re.escape(
         relation) + "(.*)" + "(" + re.escape(member1) + "|" + re.escape(member2) + "|" + re.escape(
         member3) + ")" + "(.*)" + "(" + re.escape(member1) + "|" + re.escape(member2) + "|" + re.escape(member3) + ")"
@@ -361,6 +365,7 @@ def find_cardinality():
 
 def find_cardinality_one(member, sentence_list, relationship):
     value = False
+    # regular expressions for find cardinality one
     RE_4_1 = r'.*((only|exactly) one|uniquely|no.* more than one)(.*)' + re.escape(member)
 
     for line in sentence_list:
@@ -406,7 +411,8 @@ def is_singular_verb(relationship):
 
 def find_cardinality_many(member, sentence_list):
     value = False
-    RE_4_M = r".*(more than one|many|any|one or more|several|number of|at least one|multiple|(two|three|four|five) type of).*" + re.escape(
+    # regular expressions for find cardinality many
+    RE_4_M = r".*(\bmore than one\b|\bmany\b|\bany\b|\bone or more\b|\bseveral\b|\bnumber of\b|\bat least one\b|\bmultiple\b|(\btwo\b|\bthree\b|\bfour\b|\bfive\b) \btype of\b).*" + re.escape(
         member)
     # for i, line in enumerate(open('data\\input2_text.txt')):
     for line in sentence_list:

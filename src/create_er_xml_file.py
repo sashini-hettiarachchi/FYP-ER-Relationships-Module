@@ -54,37 +54,43 @@ def create_output_xml_file():
 
 
 def recreate_relation_xml(er):
+    global member1_name, member1_cardinality, member1_primary_key, member2_primary_key, member2_name, member2_cardinality
     print(er)
     relationships_list = []
     for dic in er:
         print(dic)
-        member1_name = dic.get("entity1_name")
-        member1_cardinality = dic.get("entity1_cardinality")
-        member1_primary_key = dic.get("entity1_primary_key")
-        member2_name = dic.get("entity2_name")
-        member2_cardinality = dic.get("entity2_cardinality")
-        member2_primary_key = dic.get("entity2_primary_key")
-        member3_name = dic.get("entity3_name")
-        member3_cardinality = dic.get("entity3_cardinality")
-        member3_primary_key = dic.get("entity3_primary_key")
-        relationship = dic.get("relationship_name")
-        cardinality = dic.get("cardinality")
+        relationship = dic.get("name")
+        cardinality = dic.get("type")
         degree = dic.get("degree")
+        entities = dic.get("entities")
+        for entity in entities:
+            if entity.get('id') == 1:
+                member1_name = entity.get("name")
+                member1_cardinality = entity.get("cardinality")
+                member1_primary_key = entity.get("primaryKey")
+            elif entity.get('id') == 2:
+                member2_name = entity.get("name")
+                member2_cardinality = entity.get("cardinality")
+                member2_primary_key = entity.get("primaryKey")
+            elif entity.get('id') == 3:
+                member3_name = entity.get("name")
+                member3_cardinality = entity.get("cardinality")
+                member3_primary_key = entity.get("cardinality")
 
-        if degree == 'binary' or degree == 'unary':
-            relationships_list.append({"@name": relationship, "@degree": degree, "@type": cardinality,
-                                       "member1": {"@name": member1_name, "@cardinality": member1_cardinality,
-                                                   "@primary_key": member1_primary_key},
-                                       "member2": {"@name": member2_name, "@cardinality": member2_cardinality,
-                                                   "@primary_key": member2_primary_key}})
-        elif degree == 'ternary':
-            relationships_list.append({"@name": relationship, "@degree": degree, "@type": cardinality,
-                                       "member1": {"@name": member1_name, "@cardinality": member1_cardinality,
-                                                   "@primary_key": member1_primary_key},
-                                       "member3": {"@name": member3_name, "@cardinality": member3_cardinality,
-                                                   "@primary_key": member3_primary_key},
-                                       "member2": {"@name": member2_name, "@cardinality": member2_cardinality,
-                                                   "@primary_key": member2_primary_key}})
+                if degree == 'binary' or degree == 'unary':
+                    relationships_list.append({"@name": relationship, "@degree": degree, "@type": cardinality,
+                                               "member1": {"@name": member1_name, "@cardinality": member1_cardinality,
+                                                           "@primary_key": member1_primary_key},
+                                               "member2": {"@name": member2_name, "@cardinality": member2_cardinality,
+                                                           "@primary_key": member2_primary_key}})
+                elif degree == 'ternary':
+                    relationships_list.append({"@name": relationship, "@degree": degree, "@type": cardinality,
+                                               "member1": {"@name": member1_name, "@cardinality": member1_cardinality,
+                                                           "@primary_key": member1_primary_key},
+                                               "member3": {"@name": member3_name, "@cardinality": member3_cardinality,
+                                                           "@primary_key": member3_primary_key},
+                                               "member2": {"@name": member2_name, "@cardinality": member2_cardinality,
+                                                           "@primary_key": member2_primary_key}})
 
     print(relationships_list)
     output_dic = {'er': {'relation': relationships_list}}

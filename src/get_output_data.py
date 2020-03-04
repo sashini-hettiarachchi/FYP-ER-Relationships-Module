@@ -1,4 +1,4 @@
-from utils import file_manipulation
+from src.utils import file_manipulation
 
 relationship_dic_list = []
 

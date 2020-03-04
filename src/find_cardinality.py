@@ -3,10 +3,10 @@ import re
 import inflect
 import nltk
 
-from pre_process.common_nlp import lemmatizer, text_into_sentence
+from src.pre_process.common_nlp import lemmatizer, text_into_sentence
 from src.identify_relationship import binary_relationship_dic_list, ternary_relationship_list, \
     unary_relationship_dic_list
-from utils.file_manipulation import get_root_of_input_xml
+from src.utils.file_manipulation import get_root_of_input_xml
 
 one_to_one_relationship_list = []
 one_to_many_relationship_list = []

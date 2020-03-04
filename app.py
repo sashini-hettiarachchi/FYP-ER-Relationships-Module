@@ -1,10 +1,9 @@
 from time import sleep
 
 from flask import Flask, request, jsonify, json
-
 import main
 from src import get_output_data, create_er_xml_file
-from utils import file_manipulation
+from src.utils import file_manipulation
 
 app = Flask(__name__)
 

@@ -1,7 +1,7 @@
 import json
 import xml.etree.ElementTree as ET
 import xmltodict
-from utils.file_manipulation import PATH
+from src.utils.file_manipulation import PATH
 
 table = []
 

@@ -2,7 +2,7 @@ import spacy
 
 nlp = spacy.load('en_core_web_sm')
 import neuralcoref
-from utils.file_manipulation import input_text, PATH
+from src.utils.file_manipulation import input_text, PATH
 
 
 # neuralcoref.add_to_pipe(nlp,greedyness=0.52)

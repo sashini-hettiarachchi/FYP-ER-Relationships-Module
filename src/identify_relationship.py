@@ -3,8 +3,8 @@ import re
 
 import nltk
 
-from pre_process.common_nlp import stopWords, text_into_sentence, sentences_into_word, lemmatizer
-from utils.file_manipulation import get_root_of_input_xml
+from src.pre_process.common_nlp import stopWords, text_into_sentence, sentences_into_word, lemmatizer
+from src.utils.file_manipulation import get_root_of_input_xml
 
 filtered_sentence_list = []
 relationship_identified_sentence_list = []

@@ -6,7 +6,7 @@ from xml.etree import ElementTree
 import xmltodict
 
 from src import find_cardinality
-from utils.file_manipulation import PATH
+from src.utils.file_manipulation import PATH
 
 table = []
 folder = PATH

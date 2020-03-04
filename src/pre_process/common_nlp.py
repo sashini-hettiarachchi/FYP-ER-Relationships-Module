@@ -1,10 +1,10 @@
 import nltk
 from nltk.corpus import stopwords
 # from utils.file_manipulation import input_text
-from pre_process import pronouns_resolution
+from src.pre_process import pronouns_resolution
 import os.path
-from utils import file_manipulation
-from utils.file_manipulation import PATH
+from src.utils import file_manipulation
+from src.utils.file_manipulation import PATH
 
 stopWords = set(stopwords.words('english'))
 lemmatizer = nltk.WordNetLemmatizer()

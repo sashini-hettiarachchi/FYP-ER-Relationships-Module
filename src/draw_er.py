@@ -1,6 +1,6 @@
 import csv
 
-from utils import file_manipulation
+from src.utils import file_manipulation
 
 row_list = []
 FILL = "#dae8fc"

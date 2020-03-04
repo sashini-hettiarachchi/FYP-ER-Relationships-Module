@@ -1,0 +1,56 @@
+<er name="company">
+    <entity name="employee">
+        <attribute name="number" value="primary_key" />
+        <attribute name="name" type="composite_parent" />
+        <attribute name="first_name" type="composite_child" />
+        <attribute name="middle_name" type="composite_child" />
+        <attribute name="last_name" type="composite_child" />
+        <attribute name="salary" />
+        <attribute name="address" />
+        <attribute name="gender" />
+        <attribute name="date_of_birth" />
+    </entity>
+    <entity name="project">
+        <attribute name="number" value="primary_key" />
+        <attribute name="name" />
+        <attribute name="location" />
+    </entity>
+    <entity name="department">
+        <attribute name="number" value="primary_key" />
+        <attribute name="name" />
+        <attribute name="no_of_employees" type="derived" />
+        <attribute name="location" type="multi-valued" />
+    </entity>
+
+    <entity name="dependent">
+        <attribute name="dependent_number" value="primary_key" />
+        <attribute name="first_name" />
+        <attribute name="gender" />
+        <attribute name="date_of_birth" />
+        <attribute name="relationship" />
+    </entity>
+<relation degree="binary" name="work" type="one_to_one">
+		<member1 cardinality="many" name="employee" primary_key="number" />
+		<member2 cardinality="one" name="department" primary_key="number" />
+	</relation>
+	<relation degree="binary" name="manage" type="one_to_one">
+		<member1 cardinality="one" name="employee" primary_key="number" />
+		<member2 cardinality="one" name="department" primary_key="number" />
+	</relation>
+	<relation degree="binary" name="controls" type="many_to_many">
+		<member1 cardinality="many" name="project" primary_key="number" />
+		<member2 cardinality="one" name="department" primary_key="number" />
+	</relation>
+	<relation degree="binary" name="is_working" type="many_to_many">
+		<member1 cardinality="many" name="project" primary_key="number" />
+		<member2 cardinality="many" name="employee" primary_key="number" />
+	</relation>
+	<relation degree="binary" name="related_with" type="one_to_many">
+		<member1 cardinality="one" name="employee" primary_key="number" />
+		<member2 cardinality="many" name="dependent" primary_key="dependent_number" />
+	</relation>
+	<relation degree="unary" name="supervise" type="one_to_one">
+		<member1 cardinality="one" name="employee" primary_key="number" />
+		<member2 cardinality="one" name="employee" primary_key="number" />
+	</relation>
+</er>

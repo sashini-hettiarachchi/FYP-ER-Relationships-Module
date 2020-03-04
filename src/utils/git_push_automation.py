@@ -6,7 +6,7 @@ def git_push_automation():
     # # print(cp)
     #
     # response = input("Do you want to use the default message for this commit?([y]/n)\n")
-    message = "update the repository"
+    # message = "update the repository"
     #
     # if response.startswith('n'):
     #     message = input("What message you want?\n")

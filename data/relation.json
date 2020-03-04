@@ -1,0 +1,96 @@
+{
+    "er": {
+        "relation": [
+            {
+                "@degree": "binary",
+                "@name": "work",
+                "@type": "one_to_one",
+                "member1": {
+                    "@cardinality": "many",
+                    "@name": "employee",
+                    "@primary_key": "number"
+                },
+                "member2": {
+                    "@cardinality": "one",
+                    "@name": "department",
+                    "@primary_key": "number"
+                }
+            },
+            {
+                "@degree": "binary",
+                "@name": "manage",
+                "@type": "one_to_one",
+                "member1": {
+                    "@cardinality": "one",
+                    "@name": "employee",
+                    "@primary_key": "number"
+                },
+                "member2": {
+                    "@cardinality": "one",
+                    "@name": "department",
+                    "@primary_key": "number"
+                }
+            },
+            {
+                "@degree": "binary",
+                "@name": "controls",
+                "@type": "many_to_many",
+                "member1": {
+                    "@cardinality": "many",
+                    "@name": "project",
+                    "@primary_key": "number"
+                },
+                "member2": {
+                    "@cardinality": "one",
+                    "@name": "department",
+                    "@primary_key": "number"
+                }
+            },
+            {
+                "@degree": "binary",
+                "@name": "is_working",
+                "@type": "many_to_many",
+                "member1": {
+                    "@cardinality": "many",
+                    "@name": "project",
+                    "@primary_key": "number"
+                },
+                "member2": {
+                    "@cardinality": "many",
+                    "@name": "employee",
+                    "@primary_key": "number"
+                }
+            },
+            {
+                "@degree": "binary",
+                "@name": "related_with",
+                "@type": "one_to_many",
+                "member1": {
+                    "@cardinality": "one",
+                    "@name": "employee",
+                    "@primary_key": "number"
+                },
+                "member2": {
+                    "@cardinality": "many",
+                    "@name": "dependent",
+                    "@primary_key": "dependent_number"
+                }
+            },
+            {
+                "@degree": "unary",
+                "@name": "supervise",
+                "@type": "one_to_one",
+                "member1": {
+                    "@cardinality": "one",
+                    "@name": "employee",
+                    "@primary_key": "number"
+                },
+                "member2": {
+                    "@cardinality": "one",
+                    "@name": "employee",
+                    "@primary_key": "number"
+                }
+            }
+        ]
+    }
+}

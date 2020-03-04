@@ -1,0 +1,13 @@
+description of the ‘mini world’ is given below for an example database application called company.
+company is organized into departments.
+each department has a unique name, a unique number, and a particular employee who manages each department.
+each department keep track of the start date when a particular employee who manages the department began managing each department. a department may have several locations.
+application requires to get the total no of employees per department.
+a department controls a number of projects, each of which has a unique name, a unique number, and a single location.
+we store employee’s name (first name, middle initials, last name), employee’s number, address, salary, gender, and date of birth.
+an employee is assigned to one department but may work on several projects, which are not necessarily controlled by each department.
+an employee is working on at least one project.
+we keep track of the number of hours per week that an employee works on each project.
+we also keep track of the direct supervisor of each employee (who is another employee).
+we want to keep track of the dependents of each employee for insurance purposes.
+we keep each dependent’s first name, gender, date of birth, and relationship to the employee.

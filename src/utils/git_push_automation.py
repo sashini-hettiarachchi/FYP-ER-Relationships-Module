@@ -2,8 +2,8 @@ import subprocess as cmd
 
 
 def git_push_automation():
-    cmd.run("git add .", check=True, shell=True)
-    # # print(cp)
+    cp = cmd.run("git add .", check=True, shell=True)
+    print(cp)
     #
     # response = input("Do you want to use the default message for this commit?([y]/n)\n")
     # message = "update the repository"

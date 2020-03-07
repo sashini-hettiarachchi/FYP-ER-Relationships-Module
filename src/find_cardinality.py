@@ -64,6 +64,8 @@ def remove_duplicate_of_relationship_list_binary():
                         binary_relationship_dic_list.remove(new_dic)
                     elif new_tag_member1[0][1] == 'NNS' or new_tag_member2[0][1] == 'NNS':
                         binary_relationship_dic_list.remove(dic)
+                    else:
+                        binary_relationship_dic_list.remove(dic)
 
     # print(relationship_dic_list)
     return binary_relationship_dic_list

@@ -1,0 +1,16 @@
+patients are identified by an ssn, and patients names, addresses, and ages must be recorded.
+doctors are identified by an ssn. for each doctor, the name, specialty, and years of experience must be recorded.
+each pharmaceutical company is identified by name and has a phone number.
+for each drug, the trade name and formula must be recorded.
+each drug is sold by a given pharmaceutical company, and name identifies a drug uniquely from among the products of each pharmaceutical company.
+if a pharmaceutical company is deleted, you need not keep track of a pharmaceutical company products any longer.
+each pharmacy has a name, address, and phone number.
+every patient has a primary physician.
+every doctor has at least one patient.
+each pharmacy sells several drugs and has a price for each.
+a drug could be sold at several pharmacies, and a price for each could vary from one pharmacy to another.
+doctors prescribe drugs for patients.
+a doctor could prescribe one or more drugs for several patients, and a patient could obtain prescriptions from several doctors.
+each prescription has a date and a quantity associated with each prescription.
+you can assume that, if a doctor prescribes the same drug for the same patient more than once, only the last such prescription needs to be stored.
+pharmaceutical companies have long-term contracts with pharmacies.

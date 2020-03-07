@@ -1,13 +1,17 @@
-Description of the ‘mini world’ is given below for an example database application called company.
-The company is organized into departments.
-Each department has a unique name, a unique number, and a particular employee who manages the department.
-We keep track of the start date when that employee began managing the department. A department may have several locations.
-Application requires to get the total no of employees per department.
-A department controls a number of projects, each of which has a unique name, a unique number, and a single location.
-We store employee’s name (First Name, Middle Initials, Last Name), employee’s number, address, salary, gender, and date of birth.
-An employee is assigned to one department but may work on several projects, which are not necessarily controlled by the same department.
-An employee is working on at least one project.
-We keep track of the number of hours per week that an employee works on each project.
-We also keep track of the direct supervisor of each employee (who is another employee).
-We want to keep track of the dependents of each employee for insurance purposes.
-We keep each dependent’s first name, gender, date of birth, and relationship to the employee.
+Patients are identified by an SSN, and their names, addresses, and ages must be recorded.
+Doctors are identified by an SSN.
+For each doctor, the name, specialty, and years of experience must be recorded.
+Each pharmaceutical company is identified by name and has a phone number.
+For each drug, the trade name and formula must be recorded.
+Each drug is sold by a given pharmaceutical company, and the trade name identifies  drugs uniquely from among the products of that company.
+If a pharmaceutical company is deleted, you need not keep track of its products any longer.
+Each pharmacy has a name, address, and phone number.
+Every patient has a primary physician.
+Every doctor has at least one patient.
+Each pharmacy sells several drugs and has a price for each.
+A drug could be sold at several pharmacies, and the price could vary from one pharmacy to another.
+Doctors prescribe drugs for patients.
+A doctor could prescribe one or more drugs for several patients, and a patient could obtain prescriptions from several doctors.
+Each prescription has a date and a quantity associated with it.
+You can assume that, if a doctor prescribes the same drug for the same patient more than once, only the last such prescription needs to be stored.
+Pharmaceutical companies have long-term contracts with pharmacies.

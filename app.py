@@ -1,9 +1,8 @@
 from time import sleep
-
 from flask import Flask, request, jsonify, json
 import main
 from src import get_output_data, create_er_xml_file
-from src.utils import file_manipulation
+from src.utils import file_manipulation,git_push_automation
 
 app = Flask(__name__)
 
@@ -11,7 +10,7 @@ app = Flask(__name__)
 @app.route('/api/v1/relationships', methods=['GET'])
 def return_er_data():
     main.create_er_diagram_xml_file()
-    sleep(1)
+    sleep(10)
     relationship_data = get_output_data.get_relationship_list()
     print("Successfully Generated ER Diagram")
     print(relationship_data)
@@ -20,6 +19,7 @@ def return_er_data():
 
 @app.route('/api/v1/schema', methods=['GET'])
 def generate_relational_schema():
+    sleep(10)
     main.create_relational_schema()
     return jsonify({"success": "true", "error": "false"})
 
@@ -27,12 +27,18 @@ def generate_relational_schema():
 @app.route('/api/v1/csv', methods=['POST'])
 def create_er_csv():
     data = json.loads(request.data)
+    sleep(10)
     create_er_xml_file.recreate_relation_xml(data)
     if data is None:
         return jsonify({"success": "false", "error": "true", "message": "JSON not found"})
     else:
         main.create_er_diagram_text_file()
-        return jsonify({"success": "true", "error": "false"})
+        sleep(10)
+        output = git_push_automation.git_push_automation()
+        if output:
+            return jsonify({"success": "true", "error": "false"})
+        else:
+            return jsonify({"success": "false", "error": "true", "message": "JSON not found"})
 
 
 @app.route('/api/v1/clear', methods=['GET'])

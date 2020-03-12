@@ -15,11 +15,11 @@
 # layout: auto
 ## CSV starts under this line
 node,fill,stroke,shape,one,many,attri,compo
-work,#dae8fc,#6c8ebf,rhombus,,,,
 have,#dae8fc,#6c8ebf,rhombus,,,,
-employee,#dae8fc,#6c8ebf,rectangle,"have,have",work,,
+work,#dae8fc,#6c8ebf,rhombus,,,,
+employee,#dae8fc,#6c8ebf,rectangle,,"have,work",,
 project,#dae8fc,#6c8ebf,rectangle,,work,,
-department,#dae8fc,#6c8ebf,rectangle,,,,
+department,#dae8fc,#6c8ebf,rectangle,,have,,
 employee_name,#dae8fc,#6c8ebf,ellipse;whiteSpace=wrap;html=1;align=center;fontStyle=4;,,,employee,
 project_licence_number,#dae8fc,#6c8ebf,ellipse;whiteSpace=wrap;html=1;align=center;fontStyle=4;,,,project,
 department_number,#dae8fc,#6c8ebf,ellipse;whiteSpace=wrap;html=1;align=center;fontStyle=4;,,,department,
